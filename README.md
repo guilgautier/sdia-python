@@ -76,3 +76,29 @@ conda activate sdia-python
 conda deactivate
 # prefix (sdia-python) should disappear
 ```
+
+### Install the project in editable mode
+
+In order to be able to import your code in various places of your project (source files, test files, noteboooks), like
+
+```python
+import lab1
+from lab1.xxx import yyy
+```
+
+> You can install a project in "editable" or "develop" mode while you’re working on it.
+> When installed as editable, a project can be edited in-place without reinstallation:
+> changes to Python source files in projects installed as editable will be reflected the next time an interpreter process is started.
+
+Before installing the project in "editable" mode, [make sure to first activate your environment](#activate-a-virtual-environment),
+
+```bash
+# cd sdia-python
+conda activate sdia-python
+pip install -e .  # a (sdia-python) prefix must have appeared
+```
+
+See also
+
+- <https://packaging.python.org/guides/distributing-packages-using-setuptools/#working-in-development-mode>
+- <https://pip.pypa.io/en/latest/cli/pip_install/?highlight=editable#editable-installs>
