@@ -9,6 +9,7 @@
       - [Deactivate a virtual environment](#deactivate-a-virtual-environment)
     - [Install the project in editable mode](#install-the-project-in-editable-mode)
   - [Integrated Development Environment - Visual Studio Code](#integrated-development-environment---visual-studio-code)
+  - [Notebooks](#notebooks)
 
 Python course given to students enrolled in [Parcours DATA - Science des Données et Intelligence Artificielle (SDIA)](http://pierrechainais.ec-lille.fr/Centrale/Option_DAD/Accueil.html) managed by [Pierre Chainais](http://pierrechainais.ec-lille.fr/) at [Ecole Centrale de Lille](https://centralelille.fr/).
 
@@ -118,3 +119,18 @@ The [.vscode](./.vscode) directory contains a list of suggested extensions toget
 You can place it at the root of your project workspace.
 
 See also the [vscode-workflow](https://github.com/guilgautier/vscode-workflow) repository.
+
+## Notebooks
+
+[Jupyter](https://jupyter.org/) notebooks allow you to easily prototype code and showcase your project.
+
+In order to automatically reflect modifications of the source files into your notebook, make sure your notebook has the following cell **and run it!**
+
+```bash
+%load_ext autoreload
+%autoreload 2
+```
+
+**For example make this the top cell of your notebook.**
+
+The [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) provides a full Jupyter notebook experience [within VSCode](https://code.visualstudio.com/docs/datascience/jupyter-notebooks).
