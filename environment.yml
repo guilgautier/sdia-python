@@ -1,0 +1,39 @@
+name: sdia-python
+channels:
+  - defaults
+  - conda-forge
+  - spyder-ide
+  - plotly
+dependencies:
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - plotly
+  - networkx
+  - numba
+  # Documentation
+  - sphinx
+  # Dev
+  - pre-commit
+  - pytest
+  - black
+  - isort
+  # Jupyter notebook
+  - jupyter
+  - ipykernel
+  - notebook>=5.3 # support for plotly in notebook
+  # - ipywidget>=7.5 # support for plotly in notebook
+  # Package installer
+  # First try "conda install <pkg_name>",
+  # Last resort "pip install <pkg_name>"
+  - pip
+  - pip:
+      - ""
+  # Spyder IDE
+  # - spyder
+  # - spyder-unittest
+  # - spyder-notebook
+  # # Fix lag in spyder MacOS https://github.com/spyder-ide/spyder/issues/14218#issuecomment-729257620
+  # - pyqt
+  # - pyqtwebengine
