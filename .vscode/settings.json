@@ -1,0 +1,91 @@
+// CMD+Maj+P or View->Command palette->Preferences: Open Settings (JSON)
+// An opinionated list of VS Code settings used by Guillaume Gautier guilgautier https://guilgautier.github.io/
+{
+    // Explorer
+    "explorer.sortOrder": "type",
+    // Workbench
+    "workbench.activityBar.visible": true,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "workbench.sideBar.location": "right",
+    "workbench.statusBar.visible": true,
+    // Files
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    // Editor
+    "editor.codeActionsOnSave": {
+        "source.fixAll.markdownlint": true
+    },
+    "editor.detectIndentation": true,
+    "editor.fontSize": 13,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.insertSpaces": true,
+    // "editor.minimap.enabled": false,
+    // "editor.multiCursorModifier": "ctrlCmd",
+    "editor.renderControlCharacters": true,
+    "editor.renderWhitespace": "none",
+    "editor.snippetSuggestions": "top",
+    "editor.suggestOnTriggerCharacters": true,
+    "editor.suggestSelection": "first",
+    "editor.tabSize": 4,
+    "editor.tokenColorCustomizations": null,
+    "editor.wordWrap": "bounded",
+    "editor.quickSuggestions": true,
+    // Terminal
+    // "terminal.integrated.inheritEnv": false,
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    // "terminal.integrated.fontFamily": "Meslo LG L DZ for Powerline",
+    // Intellicode
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    // Python
+    "[python]": {
+        "editor.insertSpaces": true,
+        "editor.rulers": [
+            {
+                "column": 80,
+                "color": "#ff00FF"
+            },
+            100, // <- a ruler in the default color or as customized at column 0
+            {
+                "column": 120,
+                "color": "#ff0000"
+            },
+        ],
+        "editor.tabSize": 4,
+        "editor.wordWrapColumn": 80,
+    },
+    "python.languageServer": "Pylance",
+    // "python.condaPath": "~/opt/anaconda3/bin/anaconda",
+    // "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
+    "python.formatting.provider": "black",
+    "python.linting.enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.terminal.activateEnvironment": false,
+    "autoDocstring.docstringFormat": "google",
+    "pythonIndent.trimLinesWithOnlyWhitespace": true,
+    // Markdown
+    "[markdown]": {
+        "editor.tabSize": 2,
+        "editor.quickSuggestions": true,
+    },
+    // RestructuredText
+    "restructuredtext.confPath": "${workspaceFolder}/docs",
+    "restructuredtext.languageServer.disabled": true,
+    // TOML
+    "[toml]": {
+        "editor.defaultFormatter": "tamasfe.even-better-toml"
+    },
+    // Spell checker
+    "cSpell.enabled": true,
+    "cSpell.language": "en,fr",
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    // "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true,
+}

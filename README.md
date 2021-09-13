@@ -2,6 +2,13 @@
 
 - [SDIA - Python](#sdia---python)
   - [Get the project](#get-the-project)
+  - [Set up your working environment](#set-up-your-working-environment)
+    - [Virtual environment](#virtual-environment)
+      - [Create a virtual environment](#create-a-virtual-environment)
+      - [Activate a virtual environment](#activate-a-virtual-environment)
+      - [Deactivate a virtual environment](#deactivate-a-virtual-environment)
+    - [Install the project in editable mode](#install-the-project-in-editable-mode)
+  - [Integrated Development Environment - Visual Studio Code](#integrated-development-environment---visual-studio-code)
 
 Python course given to students enrolled in [Parcours DATA - Science des Données et Intelligence Artificielle (SDIA)](http://pierrechainais.ec-lille.fr/Centrale/Option_DAD/Accueil.html) managed by [Pierre Chainais](http://pierrechainais.ec-lille.fr/) at [Ecole Centrale de Lille](https://centralelille.fr/).
 
@@ -102,3 +109,12 @@ See also
 
 - <https://packaging.python.org/guides/distributing-packages-using-setuptools/#working-in-development-mode>
 - <https://pip.pypa.io/en/latest/cli/pip_install/?highlight=editable#editable-installs>
+
+## Integrated Development Environment - Visual Studio Code
+
+[Visual Studio Code (VSCode)](https://code.visualstudio.com/) is recommended to ease your coding experience.
+
+The [.vscode](./.vscode) directory contains a list of suggested extensions together with the corresponding settings.
+You can place it at the root of your project workspace.
+
+See also the [vscode-workflow](https://github.com/guilgautier/vscode-workflow) repository.

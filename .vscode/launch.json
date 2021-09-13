@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        { // https://code.visualstudio.com/docs/python/debugging
+            "name": "Debug tests",
+            "type": "python",
+            "request": "test", // https://code.visualstudio.com/docs/python/testing#_debug-tests
+            "program": "${file}",
+            // "console": "integratedTerminal", // problem with zsh https://github.com/microsoft/vscode-python/issues/10398#issuecomment-597454312
+            "justMyCode": true,
+            "env": {
+                "PYTEST_ADDOPTS": "--no-cov" // https://stackoverflow.com/a/67185092
+            }
+        }
+    ]
+}

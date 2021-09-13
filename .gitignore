@@ -226,12 +226,12 @@ dmypy.json
 .prof
 
 ### vscode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
+# .vscode/*
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# !.vscode/extensions.json
+# *.code-workspace
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -266,7 +266,6 @@ $RECYCLE.BIN/
 *.pytest_cache
 *.zip
 *.DS_Store
-.vscode/
 *.h5
 *.npy
 *build

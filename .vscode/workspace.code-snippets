@@ -1,0 +1,10 @@
+{
+    "my email": {
+        "scope": "markdown,python",
+        "prefix": "myemail",
+        "body": [
+            "bonjour@gmail.com"
+        ],
+        "description": ""
+    },
+}
