@@ -1,5 +1,19 @@
 # Introduction
 
+- [Introduction](#introduction)
+  - [Command line basics](#command-line-basics)
+    - [Exercise 1](#exercise-1)
+    - [Exercise 2](#exercise-2)
+  - [Version Control System - GIT and GitHub](#version-control-system---git-and-github)
+    - [Install git](#install-git)
+    - [Create a GitHub account](#create-a-github-account)
+      - [Exercise 3](#exercise-3)
+        - [Online](#online)
+        - [On your machine](#on-your-machine)
+        - [Back online](#back-online)
+        - [Back to your machine](#back-to-your-machine)
+    - [BONUSES](#bonuses)
+
 ## Command line basics
 
 | Unix                       | Windows                            |
@@ -45,12 +59,13 @@ git --version
 
 If not, install it
 
-- OSX:
-  - if you have XCode you might already have git.
-  - otherwise [install homebrew](https://brew.sh/)
+- OSX
+  - [install homebrew](https://brew.sh/), then
     - `brew install git`
-- Linux: `sudo apt-get install git`
-- Windows: Download Git for Windows (sorry...)
+- Linux
+  - `sudo apt-get install git`
+- Windows
+  - [Download and install Git for Windows](https://git-scm.com/download/win)
 
 Check if git installed properly
 
@@ -58,36 +73,35 @@ Check if git installed properly
 git --version
 ```
 
-#### Create a GitHub account
+### Create a GitHub account
 
 [GitHub](https://github.com/signup?source=login)
 
-### Exercise 3
+#### Exercise 3
 
-#### Online
+First few steps with [git](https://git-scm.com/) and [GitHub](https://github.com), using the command line interface.
+
+##### Online
 
 - Create a new **blank** (no README, Licence, .gitignore files, etc.) GitHub repository called `sdia-git`.
 
-#### On your machine
+##### On your machine
 
 - Create a new folder called `sdia-git`
 - Create a file `README.md` in the `sdia-git` folder containing at least the `# sdia-git` string at the top
 - Run `git init` in the `sdia-git` folder
-- Run `git status`
-- Run `git add README.md`
-- Run `git status`
-- Run `git commit -m "first commit"`
-- Run `git status`
-- Run `git log`
-- Run `git branch -M main`
+- Run successively and observe the output of the following commands
+  - `git status`
+  - `git add README.md`
+  - `git status`
+  - `git commit -m "first commit"`
+  - `git status`
+  - `git log`
+  - `git branch -M main`
+  - `git remote add origin https://github.com/<username>/sdia-git.git>`
+  - `git push -u origin main`
 
-- Run `git remote add origin <https://github.com/guilgautier/tmp-stud.git>`
-- Run `git push -u origin main`
-
-- [BONUS] customize the `README.md` file with some [Mardown markup](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-- [BONUS] Register for a [Student Developer Pack](https://education.github.com/pack)
-
-#### Back online
+##### Back online
 
 - Delete your `sdia-git` repository
   - Settings
@@ -96,7 +110,7 @@ git --version
 - Create a new `sdia-git` repository, but this time,
   - add README, Licence and .gitignore files.
 
-#### Back to your machine
+##### Back to your machine
 
 - Clone your new your `sdia-git` repository
 
@@ -105,6 +119,7 @@ git --version
   git clone https://github.com/<your-username>/sdia-git.git
   ```
 
-#### Anaconda and Visual Studio code
+### BONUSES
 
-- Open Anaconda Navigator
+- Customize the `README.md` file of your `sdia-git` repository with some [Mardown markup](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+- Register for a [Student Developer Pack](https://education.github.com/pack)
