@@ -5,6 +5,7 @@ channels:
   - spyder-ide
   - plotly
 dependencies:
+  - python=3.8
   - numpy
   - scipy
   - pandas
