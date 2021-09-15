@@ -3,8 +3,10 @@
 - [Define your project environments](#define-your-project-environments)
   - [Python Virtual environment with conda](#python-virtual-environment-with-conda)
     - [Exercise 1](#exercise-1)
-  - [Integrated Development Environment](#integrated-development-environment)
-    - [Launch VSCode from the command line](#launch-vscode-from-the-command-line)
+  - [Integrated Development Environment - VSCode](#integrated-development-environment---vscode)
+    - [Launch VSCode](#launch-vscode)
+      - [From Anaconda Navigator](#from-anaconda-navigator)
+      - [From the command line](#from-the-command-line)
     - [Per project configuration](#per-project-configuration)
     - [Extensions](#extensions)
       - [Exercise 2](#exercise-2)
@@ -29,12 +31,14 @@ See also the [conda cheat sheet](https://docs.conda.io/projects/conda/en/latest/
 ### Exercise 1
 
 - Read the [Getting Started section of the conda documentation](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html)
-<https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html>
-- Display the list of conda environments currently available on your machine
+
+In your terminal
+
+- list the `conda` environments currently available on your machine
 
 - For the `base` environment
   - list the installed packages
-  - what were the different channels used to install the different packages
+  - what were the channels used to install the different packages?
 
 - Create a conda environment called `myenv` with Python 3.8.2
   - install `numpy`
@@ -48,7 +52,7 @@ See also the [conda cheat sheet](https://docs.conda.io/projects/conda/en/latest/
   - install `scipy` using the `conda-forge` channel
   - export the environment to a cross-platform `myenv2.yml` file
 
-## Integrated Development Environment
+## Integrated Development Environment - VSCode
 
 [Visual Studio Code (VSCode)](https://code.visualstudio.com/) is recommended to ease your coding experience.
 
@@ -59,12 +63,27 @@ See also
 - [VSCode setup documentation](https://code.visualstudio.com/docs/setup/setup-overview)
 - [guilgautier/vscode-workflow](https://github.com/guilgautier/vscode-workflow) repository
 
-**Tip:** You may also consider [synchronizing your settings](https://code.visualstudio.com/docs/editor/settings-sync), in order to keep the same setup each time you log in VS Code (even from a different machine for example).
+**Tip:** You may also consider [synchronizing your settings](https://code.visualstudio.com/docs/editor/settings-sync), in order to keep the same setup each time you use VSCode (even from a different machine).
 
-### Launch VSCode from the command line
+**In the following, it is assumed that both Anaconda and VSCode are installed.**
+
+### Launch VSCode
+
+#### From Anaconda Navigator
+
+Launch [Anaconda Navigator](https://docs.anaconda.com/anaconda/navigator/index.html#:~:text=Anaconda%20Navigator%20is%20a%20desktop,in%20a%20local%20Anaconda%20Repository.)
+
+- (Windows) Open [Start Menu](https://support.microsoft.com/en-us/windows/open-the-start-menu-4ed57ad7-ed1f-3cc9-c9e4-f329822f5aeb) (Windows key)
+- (MacOS) Open [Spotlight](https://support.apple.com/fr-fr/guide/mac-help/mchlp1008/mac) (CMD + Space)
+
+- Search for and open `Anaconda-Navigator`
+
+- Click on VSCode->Launch
+
+#### From the command line
 
 ```bash
-code . # open VSCode and define workspace from current directory
+code . # open VSCode and define a workspace from current directory
 code README.md  # open README.md in VSCode
 ```
 
@@ -75,8 +94,8 @@ See also
 
 ### Per project configuration
 
-The [.vscode](./.vscode) directory, placed at the root of your project workspace, contains a list of suggested extensions together with the corresponding settings, code snippets, etc.
-You can share the [.vscode](./.vscode) directory with your collaborator, e.g., using git/GitHub, to make sure you have the same setup.
+The [.vscode](../.vscode) directory, placed at the root of your project workspace, contains a list of suggested extensions together with the corresponding settings, code snippets, etc.
+You can share the [.vscode](../.vscode) directory with your collaborator, e.g., using git/GitHub, to make sure you have some common setup.
 
 Note: This configuration only applies in the current workspace and has precedence over global user settings, see also [Settings](#settings) and [Snippets](#snippets).
 
@@ -94,20 +113,20 @@ The [.vscode/extensions.json](../.vscode/extensions.json) file contains a list o
 
 ### Settings
 
-> [VSCode settings](https://code.visualstudio.com/docs/getstarted/settings) You can configure Visual Studio Code to your liking through its various settings. Nearly every part of VS Code's editor, user interface, and functional behavior has options you can modify.
+> [VSCode settings](https://code.visualstudio.com/docs/getstarted/settings) You can configure Visual Studio Code to your liking through its various settings. Nearly every part of VSCode's editor, user interface, and functional behavior has options you can modify.
 
 To do so, you can either define settings
 
 - Globally: Open the Command Palette ( `CMD/CRTL + Maj + P` ) and type either
   - `Open User Settings`, or
   - `Open Settings (JSON)`,
-- Per project: see [settings.settings](../.vscode/workspace.code-snippets).
+- Per project: see [settings.json](../.vscode/settings.json).
 
 See also [guilgautier/vscode-workflow](https://github.com/guilgautier/vscode-workflow) repository.
 
 #### Exercise 3
 
-- Change the location of VSCode the sidebar left <-> right.
+- Change the location of the VSCode sidebar left <-> right.
 
 ### Snippets
 
