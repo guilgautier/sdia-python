@@ -9,7 +9,8 @@
       - [Deactivate a virtual environment](#deactivate-a-virtual-environment)
     - [Install the project in editable mode](#install-the-project-in-editable-mode)
   - [Integrated Development Environment - Visual Studio Code](#integrated-development-environment---visual-studio-code)
-  - [Notebooks](#notebooks)
+  - [Jupyter Notebooks](#jupyter-notebooks)
+    - [Launch a Jupyter notebook](#launch-a-jupyter-notebook)
 
 Python course given to students enrolled in [Parcours DATA - Science des Données et Intelligence Artificielle (SDIA)](http://pierrechainais.ec-lille.fr/Centrale/Option_DAD/Accueil.html) managed by [Pierre Chainais](http://pierrechainais.ec-lille.fr/) at [Ecole Centrale de Lille](https://centralelille.fr/).
 
@@ -122,11 +123,11 @@ See also
 
 See the [notes/anaconda-vscode.md](./notes/anaconda-vscode.md) file.
 
-## Notebooks
+## Jupyter Notebooks
 
-[Jupyter](https://jupyter.org/) notebooks allow you to easily prototype code and showcase your project.
+[Jupyter](https://jupyter.org/) notebooks allow you to easily prototype code and showcase your project, see [`notebooks/`](./notebooks/) folder.
 
-In order to automatically reflect modifications of the source files into your notebook, make sure your notebook has the following cell **and run it!**
+In order to automatically reflect modifications of the source files (located in [`src/`](./src/)) into your notebook, make sure your notebook has the following cell **and run it!**
 
 ```bash
 %load_ext autoreload
@@ -135,4 +136,16 @@ In order to automatically reflect modifications of the source files into your no
 
 **For example make this the top cell of your notebook.**
 
-The [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) provides a full Jupyter notebook experience [within VSCode](https://code.visualstudio.com/docs/datascience/jupyter-notebooks).
+### Launch a Jupyter notebook
+
+- From the command line
+
+  ```bash
+  # cd sdia-python/notebooks
+  # activate sdia-python
+  jupyter notebook
+  ```
+
+- Within VSCode
+  - The [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) provides a full [Jupyter notebook experience within VSCode](https://code.visualstudio.com/docs/datascience/jupyter-notebooks).
+    - Simply open a `.ipynb` file located in [`notebooks/`](./notebooks/)
