@@ -1,6 +1,7 @@
 # Define your project environments
 
 - [Define your project environments](#define-your-project-environments)
+  - [Requirements](#requirements)
   - [Python Virtual environment with conda](#python-virtual-environment-with-conda)
     - [Exercise 1](#exercise-1)
   - [Integrated Development Environment - VSCode](#integrated-development-environment---vscode)
@@ -14,6 +15,14 @@
       - [Exercise 3](#exercise-3)
     - [Snippets](#snippets)
       - [Exercise 4](#exercise-4)
+    - [Version control within VSCode](#version-control-within-vscode)
+
+## Requirements
+
+Install
+
+- [Anaconda](https://www.anaconda.com/)
+- [VSCode](https://code.visualstudio.com/)
 
 ## Python Virtual environment with conda
 
@@ -64,8 +73,6 @@ See also
 - [guilgautier/vscode-workflow](https://github.com/guilgautier/vscode-workflow) repository
 
 **Tip:** You may also consider [synchronizing your settings](https://code.visualstudio.com/docs/editor/settings-sync), in order to keep the same setup each time you use VSCode (even from a different machine).
-
-**In the following, it is assumed that both Anaconda and VSCode are installed.**
 
 ### Launch VSCode
 
@@ -154,3 +161,10 @@ See also [guilgautier/vscode-workflow](https://github.com/guilgautier/vscode-wor
   for idx, val in enumerate(values):
       print(idx, val)
   ```
+
+### Version control within VSCode
+
+All, and more, of what we experimented with `git` from the command line (cf. [`notes/command_line.md`](./command_line.md)) can be achieved within VSCode, using
+
+- the [VSCode integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal)
+- the [VSCode version control tool](https://code.visualstudio.com/docs/editor/versioncontrol) 😅
