@@ -20,25 +20,35 @@ Some material is inspired and/or borrowed from courses previously given by:
 
 ## Get the project
 
-From the [source page](https://github.com/guilgautier/sdia-python), you can either
+It is suggested you [Fork](https://github.com/guilgautier/sdia-python/fork) the original repository.
 
-- [Download](https://github.com/guilgautier/sdia-python/archive/refs/heads/master.zip) the project
-  - Code (green button) -> Download zip
+> A [fork](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/about-forks) is a copy of a repository that you manage.
+> Forks let you make changes to a project without affecting the original repository.
+> You can fetch updates from or submit changes to the original repository with [Pull Requests (PRs)](https://github.com/guilgautier/sdia-python/pulls).
 
-- Clone the repository
+1. [Fork](https://github.com/guilgautier/sdia-python/fork)
+2. Clone: `git clone https://github.com/<your-username>/sdia-python.git`
+3. [Create a remote](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork).
 
-  ```bash
-  cd <parent-directory-of-your-project>
-  git clone https://github.com/guilgautier/sdia-python.git
-  ```
+    ```bash
+    cd sdia-python
+    git remote -v # list the remotes ; an origin remote should be present
+    git remote add upstream https://github.com/guilgautier/sdia-python.git
+    git remote -v # remotes origin and upstream should be listed
+    ```
 
-- [Fork](https://github.com/guilgautier/sdia-python/fork) and clone your own copy of the repository
-  - This will allow you to propose modifications via [Pull Requests (PRs)](https://github.com/guilgautier/sdia-python/fork)
+This process allows you to link your local copy of `<your-username>/sdia-python` with the original repository `guilgautier/sdia-python`, so that you can fetch updates from it, e.g., corrections, new course material, etc.
 
-  ```bash
-  cd <parent-directory-of-your-project>
-  git clone https://github.com/<your-username>/sdia-python.git
-  ```
+[![git remotes](https://www.tomasbeuzen.com/post/git-fork-branch-pull/featured_hud478d74d48d19bfd1c1c03fc398c8033_312322_720x0_resize_lanczos_2.png)](https://www.tomasbeuzen.com/post/git-fork-branch-pull/)
+
+For example, at the beginning of a practical session, to get the latest course material
+
+```bash
+git checkout main # select your main branch
+git pull upstream main # fetch and merge commits from guilgautier/sdia-python
+```
+
+Note: Merge conflicts may occur 😏. We'll see how to handle this **very** common situation.
 
 ## Set up your working environment
 
