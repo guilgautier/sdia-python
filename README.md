@@ -120,10 +120,7 @@ See also
 
 [Visual Studio Code (VSCode)](https://code.visualstudio.com/) is recommended to ease your coding experience.
 
-The [.vscode](./.vscode) directory contains a list of suggested extensions together with the corresponding settings.
-You can place it at the root of your project workspace.
-
-See also the [vscode-workflow](https://github.com/guilgautier/vscode-workflow) repository.
+See the [notes/anaconda-vscode.md](./notes/anaconda-vscode.md) file.
 
 ## Notebooks
 
