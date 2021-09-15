@@ -1,8 +1,6 @@
-#!/usr/bin/env python
-# setup.py is not mandatory with newer versions of pip, but here is a shim to
-# However when using conda to manage environment and packages
-# Updating pip is constricted by
-# anaconda -> requires pip==21.0.1=py39hecd8cb5_0
+# From pip >= 21.1, setup.cfg suffices: setup.py is not mandatory https://pip.pypa.io/en/stable/news/#v21-1
+# For pip < 21.1, here is a shim that makes an editable install possible:
+# pip install -e .
 
 import setuptools
 

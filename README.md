@@ -99,7 +99,7 @@ import lab1
 from lab1.xxx import yyy
 ```
 
-> You can install a project in "editable" or "develop" mode while you’re working on it.
+> You can [install a project in "editable" or "develop" mode](https://packaging.python.org/guides/distributing-packages-using-setuptools/#working-in-development-mode) while you’re working on it.
 > When installed as editable, a project can be edited in-place without reinstallation:
 > changes to Python source files in projects installed as editable will be reflected the next time an interpreter process is started.
 
@@ -107,8 +107,8 @@ Before installing the project in "editable" mode, [make sure to first activate y
 
 ```bash
 # cd sdia-python
-conda activate sdia-python
-pip install -e .  # a (sdia-python) prefix must have appeared
+conda activate sdia-python # a (sdia-python) prefix should appear
+pip install -e .
 ```
 
 See also
