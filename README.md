@@ -54,9 +54,9 @@ Note: Merge conflicts may occur 😏. We'll see how to handle this **very** comm
 
 We will use [`conda`](https://conda.io/projects/conda/en/latest/index.html) to manage Python packages and virtual environments
 
-See also the [`conda` cheatsheet](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf).
-
 ### Virtual environment
+
+See also [notes/anaconda-vscode.md](./notes/anaconda-vscode.md)
 
 #### Create a virtual environment
 
@@ -71,11 +71,6 @@ cd sdia-python
 # conda env list
 conda env create -f environment.yml
 ```
-
-See also
-
-- [Conda as an environment manager](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
-- [Conda cheatsheet](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf)
 
 #### Activate a virtual environment
 
