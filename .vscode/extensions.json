@@ -23,9 +23,10 @@
         "njpwerner.autodocstring",
         "KevinRose.vsc-python-indent",
         // Restructuredtext
-        "lextudio.restructuredtext",
-        "snooty.snooty",
+        "lextudio.restructuredtext-pack",
         // TOML
         "tamasfe.even-better-toml",
+        //Table formatter
+        "shuworks.vscode-table-formatter",
     ]
 }

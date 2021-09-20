@@ -1,3 +1,4 @@
+# https://pre-commit.com/
 repos:
   # making isort compatible with black
   # see https://github.com/PyCQA/isort/issues/1518
