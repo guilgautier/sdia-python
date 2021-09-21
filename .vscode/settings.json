@@ -8,7 +8,6 @@
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
-    "workbench.sideBar.location": "right",
     "workbench.statusBar.visible": true,
     // Files
     "files.insertFinalNewline": true,
