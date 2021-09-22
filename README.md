@@ -12,7 +12,7 @@
   - [Jupyter Notebooks](#jupyter-notebooks)
     - [Launch a Jupyter notebook](#launch-a-jupyter-notebook)
 
-Test baksdjqpwoeojd
+Thanks Hadrien for your cooperation
 
 Python course given to students enrolled in [Parcours DATA - Science des Données et Intelligence Artificielle (SDIA)](http://pierrechainais.ec-lille.fr/Centrale/Option_DAD/Accueil.html) managed by [Pierre Chainais](http://pierrechainais.ec-lille.fr/) at [Ecole Centrale de Lille](https://centralelille.fr/).
 
