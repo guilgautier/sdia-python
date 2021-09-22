@@ -13,7 +13,8 @@ def triangle_shape(height):
     else:
         for i in range(height):
             l = ""
-            for j in range(height - i):
+            for j in range(height):
+
                 l += "x"
             l += "\n"
             t += l
