@@ -8,14 +8,15 @@ def is_unique(x):
 
 def triangle_shape(height):
     t = ""
-    if height == 0:
+    if height <= 0:
         return t
     else:
-        for i in range(height):
-            l = ""
-            for j in range(height):
-
-                l += "x"
-            l += "\n"
-            t += l
+        t = ""
+        for i in range(1, height + 1):
+            Ligne = ""
+            for j in range(height - i):
+                Ligne += " "
+            for j in range(2 * i - 1):
+                Ligne += "x"
+            t += Ligne + "\n"
         return t
