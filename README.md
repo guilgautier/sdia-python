@@ -149,3 +149,5 @@ In order to automatically reflect modifications of the source files (located in 
 - Within VSCode
   - The [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) provides a full [Jupyter notebook experience within VSCode](https://code.visualstudio.com/docs/datascience/jupyter-notebooks).
     - Simply open a `.ipynb` file located in [`notebooks/`](./notebooks/)
+
+Allo Amine
