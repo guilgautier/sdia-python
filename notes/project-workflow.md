@@ -22,8 +22,10 @@
          - **MacOS:** use preferably "zsh"
 5. Synchronize your project with git and GitHub
    - **Read `git` indications after running a command**
-   - `git status`
-     - Ideally you would get a message like "nothing to commit, working tree clean"
+   - `git status`, ideally you would get messages like
+     - "Your branch is up to date with 'origin/main'."
+     - "nothing to commit, working tree clean", or
+     - "nothing added to commit but untracked files present (use "git add" to track)"
    - Get the latest modifs from the GitHub repositories of your choice (yours or your partner's)
      - `git pull remote-name main` and solve the potential merge conflicts ☺️
    - Get the latest material from the instructor
