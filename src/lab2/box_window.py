@@ -2,8 +2,7 @@ from lab2.utils import get_random_number_generator
 
 
 class BoxWindow:
-    """[summary]
-    """
+    """[summary]"""
 
     def __init__(self, args):
         """[summary]
@@ -13,7 +12,7 @@ class BoxWindow:
         """
         self.bounds = None
 
-    def __repr__(self):
+    def __str__(self):
         r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
 
         Returns:
@@ -28,13 +27,11 @@ class BoxWindow:
         return True or False
 
     def dimension(self):
-        """[summary]
-        """
+        """[summary]"""
         return
 
     def volume(self):
-        """[summary]
-        """
+        """[summary]"""
         return
 
     def indicator_function(self, args):

@@ -22,9 +22,7 @@ def test_raise_type_error_when_something_is_called():
     ],
 )
 def test_box_string_representation(bounds, expected):
-    BoxWindow(bounds)
-    str_repr = BoxWindow.__repr__()
-    assert str_repr == expected
+    assert str(BoxWindow(bounds)) == expected
 
 
 @pytest.fixture
