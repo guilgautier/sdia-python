@@ -10,7 +10,8 @@ Welcome to sdi-python's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   lab1/index
+   lab2/index
 
 Indices and tables
 ==================

@@ -1,4 +1,12 @@
 def is_unique(x):
+    """[summary]
+
+    Args:
+        x (list of int]): [the list that we want to test]
+
+    Returns:
+        [bool]: [show if there is not 2 same elements in x]
+    """
     flag=True
     for i in range(len(x)):
         for j in range(i+1,len(x)):
@@ -12,7 +20,14 @@ def triangle_shape(height):
     if height==0:
         return("")
     else:
-        for i in range(height):
-            print( (height-i)*" "+(2*i+1)*"x" + (height+i)*" "+"\n" )
+        r=[(height-i)*" "+(2*i+1)*"x" + (height+i)*" " for i in range(height)]
 
-triangle_shape(3)
+    return("\n".join(r))
+
+
+
+
+
+
+
+print(triangle_shape(4))
