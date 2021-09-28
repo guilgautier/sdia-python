@@ -9,9 +9,10 @@
             "name": "Debug tests",
             "type": "python",
             "request": "launch",
-            "purpose": [
-                "debug-test"
-            ],
+            // avoid purpose when tests/subfolders
+            // "purpose": [
+            //     "debug-test"
+            // ],
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
