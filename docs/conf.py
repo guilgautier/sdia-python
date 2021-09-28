@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.abspath(os.path.join("..", "src")))
 
 project = "sdia-python"
 copyright = "2021, Guillaume Gautier"
-author = "Guillaume Gautier"
+author = "Virgile Valiau"
 
 
 # -- General configuration ---------------------------------------------------
