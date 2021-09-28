@@ -3,7 +3,7 @@ benco2000 = 'benco2000'
 
 
 def is_unique(x):
-    """salut"""
+    """salutt"""
     if len(x)!= len(set(x)):
         return False
     else:
