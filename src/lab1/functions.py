@@ -2,7 +2,7 @@ def is_unique(x):
     """[summary]
 
     Args:
-        x (list of int]): [the list that we want to test]
+        x (list of int]): [the list to test]
 
     Returns:
         [bool]: [show if there is not 2 same elements in x]
@@ -16,19 +16,29 @@ def is_unique(x):
     return flag
 
 def triangle_shape(height):
+    """[summary]
+
+    Args:
+        height ([int]): [the height of the triangle]
+
+    Returns:
+        [string]:[the triangle of x]
+    """
 
     if height==0:
         return("")
     else:
-        r=[(height-i)*" "+(2*i+1)*"x" + (height+i)*" " for i in range(height)]
+        r=[(height-i-1)*" "+(2*i+1)*"x"+(height-i-1)*" "  for i in range(height)]
+
+
 
     return("\n".join(r))
 
 
-# à adapter avec la fonction test
+# fonctionne à merveille
 
 
 
 
 
-print(triangle_shape(4))
+print(triangle_shape(3))
