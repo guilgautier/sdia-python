@@ -22,9 +22,10 @@ class BoxWindow:
         return ""
 
     def __len__(self):
-        return
+        return len(self)
 
     def __contains__(self, args):
+        # x in my_box_window
         return True or False
 
     def dimension(self):
@@ -53,9 +54,11 @@ class BoxWindow:
             rng ([type], optional): [description]. Defaults to None.
         """
         rng = get_random_number_generator(rng)
+        #rng.random (doc numpy)
         return
 
 
+#heritage
 class UnitBoxWindow(BoxWindow):
     def __init__(self, center, dimension):
         """[summary]
