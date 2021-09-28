@@ -3,7 +3,6 @@ benco2000 = 'benco2000'
 
 
 def is_unique(x):
-    """salutt"""
     if len(x)!= len(set(x)):
         return False
     else:
@@ -12,9 +11,10 @@ def is_unique(x):
 
 
 def triangle_shape(h):
-    if h == 0:
-        return("")
-    else:
-        for i in range (1,h):
-
-            return((2*i+1)*"x")
+    n=h
+    if h==0:
+        print("")
+    for i in range (0,h):
+        print(' '*n, end='')
+        print('x'*(2*i+1))
+        n= n - 1
