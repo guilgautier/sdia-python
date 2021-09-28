@@ -1,6 +1,11 @@
 from lab2.utils import get_random_number_generator
 
 
+
+class MyClass(object):
+    def __init__(self, args):
+
+
 class BoxWindow:
     """[summary]
     """
