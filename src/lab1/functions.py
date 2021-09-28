@@ -5,7 +5,7 @@ def is_unique(x):
         x (List): The list we check
 
     Returns:
-        [Boolean]: True if there is no duplicate items in the list
+        Boolean : True if there is no duplicate items in the list
     """
     for i in range(len(x)):
         for j in range(i + 1, len(x)):
@@ -21,7 +21,7 @@ def triangle_shape(height):
         height (int): describe the height of the triangle
 
     Returns:
-        [string]: shape of the triangle
+        String : shape of the triangle
     """
 
     t = ""

@@ -17,7 +17,7 @@ class BoxWindow:
         r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
 
         Returns:
-            [type]: [description]
+            String : "BoxWindow: [a_1,b_1] x [a_2,b_2] x ..."
         """
         return ""
 
