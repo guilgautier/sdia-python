@@ -8,9 +8,11 @@ repos:
       - id: check-case-conflict
       - id: check-docstring-first
       - id: check-json
+        exclude: ^(.vscode/|other/folder/) # weird errors with .vscode/*.json
       - id: check-toml
       - id: check-yaml
       - id: end-of-file-fixer
+        exclude: ^((.*)\.(ipynb|otherext)) # avoid reformat notebooks everytime
       - id: mixed-line-ending
       - id: trailing-whitespace
   - repo: https://github.com/psf/black

@@ -33,6 +33,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
     "sphinx.ext.mathjax",  # LaTeX math rendering
+    "sphinx.ext.napoleon",
     # "sphinxcontrib.bibtex",  # Bibliography management, installation required
 ]
 # "matplotlib.sphinxext.plot_directive" to generate matplotlib plots in the documentation
