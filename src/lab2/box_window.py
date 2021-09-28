@@ -1,6 +1,7 @@
 from lab2.utils import get_random_number_generator
 
 
+
 class BoxWindow:
     """[summary]
     """
