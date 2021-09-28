@@ -18,5 +18,9 @@ def triangle_shape(height):
                 Ligne += " "
             for j in range(2 * i - 1):
                 Ligne += "x"
-            t += Ligne + "\n"
+            for j in range(height - i):
+                Ligne += " "
+            if i < height:
+                Ligne += "\n"
+            t += Ligne
         return t
