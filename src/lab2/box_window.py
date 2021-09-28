@@ -4,14 +4,13 @@ from lab2.utils import get_random_number_generator
 class BoxWindow:
     """[summary]
     """
-
     def __init__(self, args):
         """[summary]
 
         Args:
             args ([type]): [description]
         """
-        self.bounds = None
+        self.bounds = args
 
     def __repr__(self):
         r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`

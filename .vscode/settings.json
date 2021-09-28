@@ -61,7 +61,7 @@
     "python.languageServer": "Pylance",
     // "python.condaPath": "~/opt/anaconda3/bin/anaconda",
     // "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
-    "python.formatting.provider": "black",
+    "python.formatting.provider": "yapf",
     "python.linting.enabled": true,
     "python.linting.lintOnSave": true,
     "python.terminal.activateEnvironment": false,
