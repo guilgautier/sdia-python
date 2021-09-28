@@ -25,6 +25,7 @@ def triangle_shape(height):
     return("\n".join(r))
 
 
+# à adapter avec la fonction test
 
 
 
