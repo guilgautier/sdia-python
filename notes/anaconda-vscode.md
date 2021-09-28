@@ -90,6 +90,7 @@ Launch [Anaconda Navigator](https://docs.anaconda.com/anaconda/navigator/index.h
 #### From the command line
 
 ```bash
+# cd path-to-your-projet
 code . # open VSCode and define a workspace from current directory
 code README.md  # open README.md in VSCode
 ```
