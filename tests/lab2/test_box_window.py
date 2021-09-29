@@ -97,7 +97,10 @@ def test_raises_exception_when_initializing_with_wrong_array():
 
 
 @pytest.mark.parametrize(
-    "n, rng, expected", [(1, np.random.random(123), np.array([2, 3])),],
+    "n, rng, expected", [(1, 0, np.array([[3.1848084366072715, 1.3489335688193516]])),],
 )
 def test_random_points_generation(n, rng, expected):
-    assert box_2d_05.rand(n, rng) == expected
+    box = BoxWindow(np.array([[0, 5], [0, 5]]))
+    point = box.rand(n, rng)
+    a = np.array_equal(point, expected)
+    assert a

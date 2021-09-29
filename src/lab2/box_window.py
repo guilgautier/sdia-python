@@ -3,7 +3,7 @@ import numpy as np
 
 
 class BoxWindow:
-    """[summary]"""
+    """Represents a box in any dimension, defined by a number of segments."""
 
     def __init__(self, bounds):
         """Initializes the bounds with the np.array given as a parameter
