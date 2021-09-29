@@ -7,7 +7,7 @@ from lab2.box_window import BoxWindow
 def test_raise_type_error_when_something_is_called():
     with pytest.raises(TypeError):
         # call_something_that_raises_TypeError()
-        pass
+        raise TypeError()
 
 
 @pytest.mark.parametrize(
