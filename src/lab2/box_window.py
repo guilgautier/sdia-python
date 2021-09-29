@@ -20,7 +20,11 @@ class BoxWindow:
         Returns:
             [type]: [description]
         """
-        return ""
+        shape=(self.bounds).shape
+        representation="BoxWindow: "
+        for i in range(shape[0]):
+            representation=representation+(self.bounds)[i].tostring()+" x "
+        return representation
 
     def __len__(self):
         return
