@@ -4,13 +4,14 @@ from lab2.utils import get_random_number_generator
 class BoxWindow:
     """[summary]"""
 
-    def __init__(self, args):
+    def __init__(self, bounds=np.array([[0, 1], [0, 1], [0, 1]])):
         """[summary]
 
         Args:
             args ([type]): [description]
         """
-        self.bounds = None
+
+        self.bounds = bounds
 
     def __str__(self):
         r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
@@ -23,24 +24,31 @@ class BoxWindow:
     def __len__(self):
         return
 
-    def __contains__(self, args):
-        return True or False
+    def __contains__(self, point):
+        assert len(point) == self.dimension()
+        for i in range(self.dimension()):
+            if not (self.bounds[i, 0] <= point[i] <= self.bounds[i, 1]):
+                return False
+        return True
 
     def dimension(self):
         """[summary]"""
-        return
+        return len(self.bounds)
 
     def volume(self):
         """[summary]"""
-        return
+        V = 1
+        for [a, b] in self.bounds:
+            V *= b - a
+        return V
 
-    def indicator_function(self, args):
+    def indicator_function(self, point):
         """[summary]
 
         Args:
             args ([type]): [description]
         """
-        return
+        return 1 if self.contains(point) else 0
 
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
@@ -50,7 +58,10 @@ class BoxWindow:
             rng ([type], optional): [description]. Defaults to None.
         """
         rng = get_random_number_generator(rng)
-        return
+        pointArray = np.array(
+            [[rng.random() * (b - a) + a for [a, b] in self.bounds] for i in range(n)]
+        )
+        return pointArray
 
 
 class UnitBoxWindow(BoxWindow):
