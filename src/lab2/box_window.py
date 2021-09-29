@@ -24,9 +24,38 @@ class BoxWindow:
         shape = (self.bounds).shape
         representation = "BoxWindow: "
         for i in range(shape[0] - 1):
-            representation = representation + str((self.bounds)[i]) + " x "
+            representation = (
+                representation
+                + "["
+                + str((self.bounds)[i][0])
+                + ", "
+                + str((self.bounds)[i][1])
+                + "]"
+                + " x "
+            )
 
-        representation = representation + str((self.bounds)[shape[0] - 1])
+            # representation = (
+            #     representation
+            #     + np.array2string(
+            #         (self.bounds)[i], precision=2, separator=", ", suppress_small=True
+            #     )
+            #     + " x "
+            # )
+
+        representation = (
+            representation
+            + "["
+            + str((self.bounds)[shape[0] - 1][0])
+            + ", "
+            + str((self.bounds)[shape[0] - 1][1])
+            + "]"
+        )
+        # representation = representation + np.array2string(
+        #     (self.bounds)[shape[0] - 1],
+        #     precision=2,
+        #     separator=", ",
+        #     suppress_small=True,
+        # )
         return representation
 
     def __len__(self):
@@ -34,8 +63,8 @@ class BoxWindow:
 
     def __contains__(self, args):
         flag = True
-        for i in self.__len__():
-            if args[i] >= self.bounds[i][0] and args[i] <= self.bounds[i][0]:
+        for i in range(self.__len__()):
+            if args[i] >= self.bounds[i][0] and args[i] <= self.bounds[i][1]:
                 flag = True
             else:
                 return False
@@ -61,9 +90,9 @@ class BoxWindow:
             args ([type]): [description]
         """
         if self.__contains__(args):
-            return 1
+            return True
         else:
-            return 0
+            return False
 
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
@@ -73,7 +102,21 @@ class BoxWindow:
             rng ([type], optional): [description]. Defaults to None.
         """
         rng = get_random_number_generator(rng)
-        return
+        L = np.ones((n, self.__len__()))  # liste des points
+        for i in range(n):
+            if self.__len__() == 1:
+                L[i] = (1 - rng.random()) * self.bounds[0] + rng.random() * self.bounds[
+                    1
+                ]
+
+            elif self.__len__() != 1:
+                for j in range(self.__len__()):
+
+                    L[i][j] = (1 - rng.random()) * self.bounds[j][
+                        0
+                    ] + rng.random() * self.bounds[j][1]
+
+        return L
 
 
 class UnitBoxWindow(BoxWindow):
@@ -87,9 +130,7 @@ class UnitBoxWindow(BoxWindow):
         super(BoxWindow, self).__init__(args)
 
 
-# a finir
-bounds = np.array([[1, 2], [2, 3]])
-
+bounds = np.array([[0.5, 0.7], [0.5, 0.7]])
 box = BoxWindow(bounds)
 
-print(box.__str__())
+print(box.rand(n=1))
