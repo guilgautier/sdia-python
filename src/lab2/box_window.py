@@ -4,13 +4,14 @@ from lab2.utils import get_random_number_generator
 class BoxWindow:
     """[summary]"""
 
-    def __init__(self, args):
+    def __init__(self, bounds):
         """[summary]
 
         Args:
             args ([type]): [description]
         """
-        self.bounds = None
+
+        self.bounds = bounds
 
     def __str__(self):
         r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
@@ -23,8 +24,15 @@ class BoxWindow:
     def __len__(self):
         return
 
-    def __contains__(self, args):
-        return True or False
+    def __contains__(self, point):
+
+        bounds = self.bounds
+        dim = self.dimension()
+        for i in range(dim):
+            if not dim[i][0] <= point[i] <= dim[i][1]:
+                return False
+
+        return True
 
     def dimension(self):
         """[summary]"""
@@ -40,6 +48,7 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
+
         return
 
     def rand(self, n=1, rng=None):
@@ -49,6 +58,7 @@ class BoxWindow:
             n (int, optional): [description]. Defaults to 1.
             rng ([type], optional): [description]. Defaults to None.
         """
+
         rng = get_random_number_generator(rng)
         return
 
