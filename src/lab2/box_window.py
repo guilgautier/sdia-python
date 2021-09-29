@@ -24,8 +24,14 @@ class BoxWindow:
     def __len__(self):
         return len(self.bounds)
 
-    def __contains__(self, args):
-        return True or False
+    def in_segment(self, x, segment):
+        return segment[0] <= x < segment[1]
+
+    def __contains__(self, x):
+        for idx, x_coord in enumerate(x):
+            if not self.in_segment(x_coord, self.bounds[idx]):
+                return False
+        return True
 
     def dimension(self):
         """Returns number of dimensions of box window"""

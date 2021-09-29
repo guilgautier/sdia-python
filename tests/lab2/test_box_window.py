@@ -17,7 +17,7 @@ def test_raise_type_error_when_something_is_called():
         (np.array([[0, 5], [0, 5]]), "BoxWindow: [0, 5] x [0, 5]"),
         (
             np.array([[0, 5], [-1.45, 3.14], [-10, 10]]),
-            "BoxWindow: [0, 5] x [-1.45, 3.14] x [-10, 10]",
+            "BoxWindow: [0.0, 5.0] x [-1.45, 3.14] x [-10.0, 10.0]",
         ),
     ],
 )
