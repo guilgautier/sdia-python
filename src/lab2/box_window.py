@@ -1,5 +1,5 @@
 from lab2.utils import get_random_number_generator
-
+import numpy as np
 
 
 class BoxWindow:
@@ -11,33 +11,48 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
-        self.bounds = None
+
+        self.bounds = args
 
     def __str__(self):
-        r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
+        """BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
 
         Returns:
             [type]: [description]
         """
-        shape=(self.bounds).shape
-        representation="BoxWindow: "
-        for i in range(shape[0]):
-            representation=representation+(self.bounds)[i].tostring()+" x "
+
+        shape = (self.bounds).shape
+        representation = "BoxWindow: "
+        for i in range(shape[0] - 1):
+            representation = representation + str((self.bounds)[i]) + " x "
+
+        representation = representation + str((self.bounds)[shape[0] - 1])
         return representation
 
     def __len__(self):
-        return
+        return ((self.bounds).shape)[0]
 
     def __contains__(self, args):
-        return True or False
+        flag = True
+        for i in self.__len__():
+            if args[i] >= self.bounds[i][0] and args[i] <= self.bounds[i][0]:
+                flag = True
+            else:
+                return False
+
+        return flag
 
     def dimension(self):
         """[summary]"""
-        return
+        return self.__len__()
 
     def volume(self):
         """[summary]"""
-        return
+        v = 1
+        for i in range(self.dimension()):
+            v = v * abs((self.bounds[i][1] - self.bounds[i][0]))
+
+        return v
 
     def indicator_function(self, args):
         """[summary]
@@ -45,7 +60,10 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
-        return
+        if self.__contains__(args):
+            return 1
+        else:
+            return 0
 
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
@@ -69,4 +87,9 @@ class UnitBoxWindow(BoxWindow):
         super(BoxWindow, self).__init__(args)
 
 
-#a finir
+# a finir
+bounds = np.array([[1, 2], [2, 3]])
+
+box = BoxWindow(bounds)
+
+print(box.__str__())
