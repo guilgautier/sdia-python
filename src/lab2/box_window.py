@@ -25,7 +25,7 @@ class BoxWindow:
         return
 
     def __contains__(self, point):
-
+        assert len(point) == self.dimension()
         bounds = self.bounds
         dim = self.dimension()
         for i in range(dim):
@@ -36,11 +36,14 @@ class BoxWindow:
 
     def dimension(self):
         """[summary]"""
-        return
+        return len(self.bounds)
 
     def volume(self):
         """[summary]"""
-        return
+        V = 1
+        for [a, b] in self.bounds:
+            V *= b - a
+        return V
 
     def indicator_function(self, args):
         """[summary]
@@ -49,7 +52,7 @@ class BoxWindow:
             args ([type]): [description]
         """
 
-        return
+        return 1 if self.contains(point) else 0
 
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
@@ -60,7 +63,10 @@ class BoxWindow:
         """
 
         rng = get_random_number_generator(rng)
-        return
+        pointArray = np.array(
+            [[rng.random() * (b - a) + a for [a, b] in self.bounds] for i in range(n)]
+        )
+        return pointArray
 
 
 class UnitBoxWindow(BoxWindow):
