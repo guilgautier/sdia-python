@@ -47,3 +47,35 @@ def test_indicator_function_box_2d(box_2d_05, point, expected):
 # ================================
 # ==== WRITE YOUR TESTS BELOW ====
 # ================================
+
+
+@pytest.fixture
+def box_2d_05():
+    return BoxWindow(np.array([[0, 5], [-5, 5], [-1, 9]]))
+
+
+@pytest.mark.parametrize(
+    "point, expected",
+    [
+        (np.array([0, 0, 5]), True),
+        (np.array([2.5, 2.5, 2.5]), True),
+        (np.array([-1, 5, 8]), False),
+        (np.array([1, 50, 7]), False),
+        (np.array([1, 4, 11]), False),
+    ],
+)
+def test_contains(box_2d_05, point, expected):
+    is_in = point in box_2d_05
+    assert is_in == expected
+
+
+@pytest.mark.parametrize(
+    "bounds, expected",
+    [
+        (np.array([[0, 1]]), 1),
+        (np.array([[-5, 5], [-10, 20]]), 300),
+        (np.array([[-5, 5], [-10, 20], [38.5, 39.5]]), 300),
+    ],
+)
+def test_volume(bounds, expected):
+    assert BoxWindow(bounds).volume() == expected
