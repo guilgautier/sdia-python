@@ -41,7 +41,7 @@ class BoxWindow:
         """[summary]"""
         dim = len(self)
         volume = 1
-        for i in range(dim):
+        for i in range(0, dim - 1):
             long = abs(self.bounds[i][0] - self.bounds[i][1])
             volume = volume * long
         return volume
