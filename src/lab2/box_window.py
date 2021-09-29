@@ -25,13 +25,12 @@ class BoxWindow:
         """
         box="BoxWindow "
         for i in range (len(self.bounds)):
-            box = box +
-
         return ""
 
     def __len__(self):
-        """Méthode qui permet de connaître la dimension de la box. La dimension est la shape de l'array. Dimension de bounds * 2."""
-        return self.bounds.shape[0]  """ permet d'avoir la première dimension"""
+        """Méthode qui permet de connaître la dimension de la box. La dimension est la shape de l'array. Dimension de bounds * 2.
+        Le premier return permet d'avoir la première dimension."""
+        return self.bounds.shape[0]
         return len(self.bounds)
 
     def __contains__(self, point):
