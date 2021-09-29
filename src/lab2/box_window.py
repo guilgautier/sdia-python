@@ -5,13 +5,13 @@ import numpy as np
 class BoxWindow:
     """Représentation de [x,y] x [x1,y1] x ... x [xn,yn] """
 
-    def __init__(self, L):
+    def __init__(self, bounds):
         """Construit l'objet
 
         Args:
             args np.array([[x,y],[x1,y1],...,[xn,yn]]): np.array d'intervalle dans chaque dimension
         """
-        self.bounds = L
+        self.bounds = bounds
 
     def __str__(self):
         r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
@@ -50,35 +50,48 @@ class BoxWindow:
         return res
 
     def indicator_function(self, point):
-        """[summary]
+        """return the image of the point through the indicator function described by the bow window
 
         Args:
             args ([type]): [description]
         """
         return self.__contains__(point)
 
-    def rand(self, n=1, rng=None):
+    def rand(self, n=1, seed=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
 
         Args:
             n (int, optional): [description]. Defaults to 1.
             rng ([type], optional): [description]. Defaults to None.
         """
-        rng = get_random_number_generator(rng)
-        L = np.array((n, 2))
+        rng = get_random_number_generator(seed)
+        L = []
         for i in range(n):
-            P = []
+            Point = []
             for j in range(self.dimension()):
-                P.append("")
+                Point.append(rng.uniform(self.bounds[j][0], self.bounds[j][1]))
+            L.append(Point)
         return L
+
+    def center(self):
+        l = []
+        for i in range(len(self.bounds)):
+            l.append(round((self.bounds[i][0] + self.bounds[i][1]) / 2, 2))
+        print(l)
+        return np.array(l)
 
 
 class UnitBoxWindow(BoxWindow):
     def __init__(self, center, dimension):
-        """[summary]
+        """Create a Box window with bounds of length equal to 1
 
         Args:
-            dimension ([type]): [description]
-            center ([type], optional): [description]. Defaults to None.
+            dimension (int): dimension de la boite
+            center (np.array): centre de la boite.
         """
-        super(BoxWindow, self).__init__(args)
+        assert len(center) == dimension
+        bounds = np.zeros((dimension, 2))
+        for i in range(dimension):
+            bounds[i] = [center[i] - 0.5, center[i] + 0.5]
+        print(bounds)
+        BoxWindow.__init__(self, bounds)
