@@ -1,9 +1,9 @@
 from lab2.utils import get_random_number_generator
+import numpy as np
 
 
 class BoxWindow:
-    """[summary]
-    """
+    """[summary]"""
     def __init__(self, args):
         """[summary]
 
@@ -12,29 +12,31 @@ class BoxWindow:
         """
         self.bounds = args
 
-    def __repr__(self):
+    def __str__(self):
         r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
 
         Returns:
             [type]: [description]
         """
-        return ""
+        l_str = list(map(lambda x: f"[{x[0]}, {x[1]}]", self.bounds))
+        return "BoxWindow: " + " x ".join(l_str)
 
     def __len__(self):
-        return
+        return len(self.bounds)
 
     def __contains__(self, args):
         return True or False
 
     def dimension(self):
-        """[summary]
-        """
-        return
+        """Returns number of dimensions of box window"""
+        return len(self)
 
     def volume(self):
-        """[summary]
-        """
-        return
+        """[summary]"""
+        v = 1
+        for dim in self.bounds:
+            v *= np.abs(dim[0] - dim[1])
+        return v
 
     def indicator_function(self, args):
         """[summary]
@@ -42,7 +44,7 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
-        return
+        return args in self
 
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
