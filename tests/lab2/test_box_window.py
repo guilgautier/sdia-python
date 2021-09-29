@@ -46,6 +46,59 @@ def test_indicator_function_box_2d(box_2d_05, point, expected):
     assert is_in == expected
 
 
+@pytest.mark.parametrize(
+    "point, expected",
+    [
+        (np.array([0, 0]), True),
+        (np.array([2.5, 2.5]), True),
+        (np.array([-1, 5]), False),
+        (np.array([10, 3]), False),
+    ],
+)
+def test_contains_function_box_2d(box_2d_05, point, expected):
+    is_in = box_2d_05.__contains__(point)
+    assert is_in == expected
+
+
 # ================================
 # ==== WRITE YOUR TESTS BELOW ====
 # ================================
+
+
+@pytest.mark.parametrize(
+    "box, expected",
+    [
+        (np.array([[1, 2]]), 1),
+        (np.array([[1, 2], [3, 4]]), 2),
+        (np.array([[1, 2], [3, 4], [5, 6]]), 3),
+        (np.array([[1, 2], [3, 4], [5, 6], [1, 2], [3, 4], [5, 6]]), 6),
+    ],
+)
+def test_len_box(box, expected):
+    assert len(BoxWindow(box)) == expected
+
+
+@pytest.mark.parametrize(
+    "box, expected",
+    [
+        (np.array([[1, 2]]), 1),
+        (np.array([[1, 2], [3, 4]]), 2),
+        (np.array([[1, 2], [3, 4], [5, 6]]), 3),
+        (np.array([[1, 2], [3, 4], [5, 6], [1, 2], [3, 4], [5, 6]]), 6),
+    ],
+)
+def test_dimension_box(box, expected):
+    assert BoxWindow(box).dimension() == expected
+
+
+@pytest.mark.parametrize(
+    "box, expected",
+    [
+        (np.array([[1, 2]]), 1),
+        (np.array([[1, 2], [3, 4]]), 2),
+        (np.array([[1, 2], [3, 4], [5, 6]]), 3),
+        (np.array([[1, 2], [3, 4], [5, 6], [1, 2], [3, 4], [5, 6]]), 6),
+    ],
+)
+def test_volume_box(box, expected):
+    assert BoxWindow(box).volume() == expected
