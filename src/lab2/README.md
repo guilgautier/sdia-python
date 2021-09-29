@@ -114,4 +114,10 @@ To generate the documentation locally, i.e., on your machine, you can either use
 - Add new methods of your choice like `center`, etc.
 - Write new tests that test various use cases of the different methods
 - Create the counterpart `BallWindow` class that works at least in 1D and 2D
-- Estimate the value of `pi` using rejection sampling
+
+- [Bonus] Estimate the value of `pi` using [rejection sampling](https://en.wikipedia.org/wiki/Rejection_sampling)
+
+See also
+
+- [Real Python - Class tutorial](https://realpython.com/python3-object-oriented-programming/)
+- [Official Python - Class tutorial](https://docs.python.org/fr/3/tutorial/classes.html)
