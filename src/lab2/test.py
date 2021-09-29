@@ -16,4 +16,9 @@ print(b.volume())
 
 x = np.array([[0., 5.]])
 
-print()
+print(b.get_random_point_inside())
+print(b.rand(n=2))
+
+uB = UnitBoxWindow([0, 3, 4, 0], 10)
+print(uB)
+print(uB.volume())
