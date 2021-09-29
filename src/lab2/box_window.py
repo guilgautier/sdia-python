@@ -1,38 +1,50 @@
 from lab2.utils import get_random_number_generator
+import numpy as np
 
 
 class BoxWindow:
     """[summary]"""
 
-    def __init__(self, args):
-        """[summary]
+    def __init__(self, boundsArg):
+        """Initialize the BoxWindows from the bounds given in the array.
 
         Args:
-            args ([type]): [description]
+            args (array): array of bounds containing the coordinates of each bound
         """
-        self.bounds = None
+        self.bounds = np.array(boundsArg)
 
     def __str__(self):
-        r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
+        """Display the BoxWindow in a string
 
         Returns:
-            [type]: [description]
+            [string]: BoxWindows points coordinates
         """
-        return ""
+        description = "BoxWindow: "
+        for i in range(len(self.bounds)):
+            description = description + str(list(self.bounds[i])) + " x "
+        return description[:-3]
 
     def __len__(self):
-        return
+        return self.bounds.size
 
-    def __contains__(self, args):
-        return True or False
+    def __contains__(self, point):
+        # assert len(point) == len(self)  ##Test if the point has the same dimension
+        a = self.bounds[:, 0]
+        b = self.bounds[:, 1]
+        return np.all(np.logical_and(a <= point, point <= b))
 
     def dimension(self):
         """[summary]"""
-        return
+        return len(self)
 
     def volume(self):
         """[summary]"""
-        return
+        dim = len(self)
+        volume = 1
+        for i in range(dim):
+            long = abs(self.bounds[i][0] - self.bounds[i][1])
+            volume = volume * long
+        return volume
 
     def indicator_function(self, args):
         """[summary]
@@ -61,4 +73,4 @@ class UnitBoxWindow(BoxWindow):
             dimension ([type]): [description]
             center ([type], optional): [description]. Defaults to None.
         """
-        super(BoxWindow, self).__init__(args)
+        # super(BoxWindow, self).__init__(args)
