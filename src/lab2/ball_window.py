@@ -3,74 +3,85 @@ import numpy as np
 
 
 class BallWindow:
-    """fenetre ronde
-    """
+    """BallWindow is an object of N dimension. In 1D, it can be represented by a range, in 2D a circle and in 3D a ball"""
 
-    def __init__(self, centre, rayon):
-        """[summary]
+    def __init__(self, centre, radius):
+        """This method initializes the ball, thanks to the center of the ball and its radius.
 
         Args:
-            centre (Liste): Point qui centre la fenetre
-            rayon (int): rayon de la fenetre
+            centre (Liste): center of the ball
+            radius (int): radius of the ball
             """
 
-        self.rayon = rayon
+        self.radius = radius
         self.centre = centre
 
     def __str__(self):
-        """affiche le centre et le rayon de la fenetre
+        """display the center and the radius of the ball
         """
 
         return (
-            "BallWindow de centre: "
+            "BallWindow with centre: "
             + str(self.centre)
-            + " et de rayon: "
-            + str(self.rayon)
+            + " and radius: "
+            + str(self.radius)
         )
 
     def __len__(self):
-        """renvoie la dimension du centre
-        """
+        """Returns the number of dimension of the ball"""
         return len(self.centre)
 
     def __contains__(self, point):
-        """dit si le point est dans la fenetre
+        """Returns true if a point is contained in the ball. The coordinates of the point are given in parameter.
 
-        Args:
-            point (Array): point de l'ensemble
+        args:
+            args (array): list of coordinates of the point
         """
         dist = 0
-        for i, x in point:
-            dist += (x - self.centre[i]) ** 2
-        return np.sqrt(dist) <= self.rayon
+        for i in range(len(point)):
+            dist += (point[i] - self.centre[i]) ** 2
+        dist = np.sqrt(dist)
+        return dist <= self.radius
 
     def dimension(self):
-        """renvoie la dimension de la fenetre
-        """
+        """Returns the number of dimension of the ball"""
         return len(self)
 
     def volume(self):
-        """volume/aire/longueur de la BallWindow
+        """volume/area/length of the BallWindow
 
         Returns:
-            int: volume/aire/longueur
+            int: volume/area/length
         """
         assert len(self) <= 3
         if len(self) == 3:
-            return (4 * np.pi * self.rayon ** 3) / 3
+            return (4 * np.pi * self.radius ** 3) / 3
         elif len(self) == 2:
-            return np.pi * self.rayon ** 2
+            return np.pi * self.radius ** 2
         else:
-            return 2 * self.rayon
+            return 2 * self.radius
 
     def indicator_function(self, point):
-        """return the image of the point through the indicator function described by the bow window
+        """return the image of the point through the indicator function described by the ball window
 
         Args:
-            args ([type]): [description]
+            args (array): points to test
         """
         return self.__contains__(point)
 
-        ###########
-        # On pourrait continuer avec les autres fonctions (rand,..)
-        ###########
+    def rand_2d(self, n=1, seed=None):
+        """generate n random numbers in a 2d ball window
+
+        Args:
+            n (int): number of points to generate
+            seed (int): describe the generator. Defaults to None.
+        """
+        rng = get_random_number_generator(seed)
+        L = []
+        for i in range(n):
+            rayon = rng.uniform(0, self.rayon)
+            teta = rng.uniform(0, 2 * np.pi)
+            x = rayon * np.cos(teta) + self.center[0]
+            y = rayon * np.sin(teta) + self.center[1]
+            L.append([x, y])
+        return L
