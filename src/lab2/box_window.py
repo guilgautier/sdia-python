@@ -22,12 +22,27 @@ class BoxWindow:
         """
         s = "BoxWindow: "
         if len(self.bounds) == 1:
-            s = s + "[" + str(self.bounds[0]) + "]"
+            s = s + "[" + str(self.bounds[0][0]) + ", " + str(self.bounds[0][1]) + "]"
             return s
         else:
             for k in range(0, len(self.bounds) - 1):
-                s = s + "[" + str(self.bounds[k]) + "]" + " x "
-            s = s + "[" + str(self.bounds[len(self.bounds) - 1]) + "]"
+                s = (
+                    s
+                    + "["
+                    + str(self.bounds[k][0])
+                    + ", "
+                    + str(self.bounds[k][1])
+                    + "]"
+                    + " x "
+                )
+            s = (
+                s
+                + "["
+                + str(self.bounds[len(self.bounds) - 1][0])
+                + ", "
+                + str(self.bounds[len(self.bounds) - 1][1])
+                + "]"
+            )
             return s
 
     def __len__(self):
