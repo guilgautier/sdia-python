@@ -42,7 +42,7 @@ Test your code from `lab1` and make sure they all pass.
 
 Sphinx is in charge of building the documentation and generating HTML output, but also PDF, epub, ...
 
-Documentaion is an **essential** part of your project; you must take some time to document you project properly.
+Documentation is an **essential** part of your project; you must take some time to document you project properly.
 
 See also:
 
@@ -56,8 +56,8 @@ See also:
 
 In this project, we suggest to use
 
-- the ["Python Docstring Generator" extension](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring) may be of great help, [`.vscode/extensions.json`](../../.vscode/extensions.json) file,
-- the Google docstring format as defined at  `"autoDocstring.docstringFormat": "google"` in the [`.vscode/settings.json`](../../.vscode/settings.json) file.
+- the ["Python Docstring Generator" extension](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring), see the [`.vscode/extensions.json`](../../.vscode/extensions.json) file,
+- the Google docstring format as defined at `"autoDocstring.docstringFormat": "google"` in the [`.vscode/settings.json`](../../.vscode/settings.json) file.
   - note that the `"sphinx.ext.napoleon"` is required to support google and numpy docstring style as defined in the [`docs/conf.py`](../../docs/conf.py) file.
 
 See also:
