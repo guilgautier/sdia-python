@@ -12,6 +12,8 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
+        assert type(bounds) == np.ndarray
+        assert len(bounds.T) == 2
         self.bounds = np.array(bounds)
 
     def __repr__(self):
@@ -81,7 +83,12 @@ class BoxWindow:
             rng ([type], optional): [description]. Defaults to None.
         """
         rng = get_random_number_generator(rng)
-        return
+        points = np.zeros((n, len(self.bounds)))
+        for k in range(0, n):
+            for i in range(0, len(self.bounds)):
+                c = rng.uniform(self.bounds[i][0], self.bounds[i][1])
+                points[k][i] = c
+        return points
 
 
 class UnitBoxWindow(BoxWindow):

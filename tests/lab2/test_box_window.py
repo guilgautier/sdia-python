@@ -94,3 +94,15 @@ def test_dimension_box(box, expected):
 )
 def test_volume_box(box, expected):
     assert BoxWindow(box).volume() == expected
+
+
+def test_rand_onepoint_onedimension():
+    box = BoxWindow(np.array([[1, 2]]))
+    assert box.__contains__(box.rand())
+
+
+def test_rand_multiplepoint_3dimension():
+    box = BoxWindow(np.array([[1, 2], [10, 15.5], [3.5, 7]]))
+    coord = box.rand(100)
+    for value in coord:
+        assert box.__contains__(value)
