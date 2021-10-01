@@ -54,7 +54,12 @@ def ball_1d():
 
 
 @pytest.mark.parametrize(
-    "point, expected", [(6, True), (4.5, True), (1, False),],
+    "point, expected",
+    [
+        (6, True),
+        (4.5, True),
+        (1, False),
+    ],
 )
 def test_indicator_function1D(ball_1d, point, expected):
     is_in = ball_1d.indicator_function(point)
@@ -63,7 +68,9 @@ def test_indicator_function1D(ball_1d, point, expected):
 
 @pytest.mark.parametrize(
     "n, rng, expected",
-    [(1, 0, np.array([[0.18864415955389333, 0.0799007050028547]])),],
+    [
+        (1, 0, np.array([[0.18864415955389333, 0.0799007050028547]])),
+    ],
 )
 def test_random_points_generation(n, rng, expected):
     box = BallWindow(center=np.array([0, 0]), radius=5)

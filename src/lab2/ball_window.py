@@ -1,5 +1,6 @@
-from lab2.utils import get_random_number_generator
 import numpy as np
+
+from lab2.utils import get_random_number_generator
 
 
 class BallWindow:
@@ -11,12 +12,15 @@ class BallWindow:
             radius (float): float representing the radius
         """
         center = np.array(center)
+        # * simplys use assert len(center) or raise exception
         assert len(center) >= 1
 
         self.center = center
+        # ? why taking abs(), radius must be positive
         self.radius = float(abs(radius))
 
     def __str__(self):
+        # ! not implemented
         pass
 
     def __len__(self):
@@ -39,6 +43,7 @@ class BallWindow:
         point = np.array(point)
         assert self.dimension() == point.size
 
+        # * exploit numpy vectorize point - self.center
         difference = np.subtract(point, self.center)
         return np.linalg.norm(difference) <= self.radius
 
@@ -56,6 +61,7 @@ class BallWindow:
         Returns:
             float : volume of the ball
         """
+        # * nice, consider using scipy.special
         n = self.dimension()
         R = self.radius
         if n % 2 == 0:  # formula in case dimension is even
@@ -66,6 +72,7 @@ class BallWindow:
             return 2 ** ((n + 1) / 2) * np.pi ** ((n - 1) / 2) * R ** n / product
 
     def indicator_function(self, point):
+        # todo handle multiple points
         return point in self
 
     def rand(self, n=1, rng=None):
@@ -81,6 +88,8 @@ class BallWindow:
         rng = get_random_number_generator(rng)
         point_list = []
 
+        # * exploit numpy vectorization power to avoid looping
+        # ? are you sure vector is indeed uniformly distributed
         for _ in range(n):
             # a random direction is chosen from a random vector
             direction = rng.random(self.dimension())

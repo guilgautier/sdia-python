@@ -24,9 +24,9 @@ def triangle_shape(height):
         string: Representation of the triangle
     """
 
-    str = ""
+    str = ""  # ! "str" is a reserved keyword use "string" instead
     for i in range(1, height + 1):
-        prefix = "\n" if i > 1 else ""
+        prefix = "\n" if i > 1 else ""  # * nice inlining
         spaces = " " * (height - i)
         str += prefix + " " * (height - i) + "x" * (2 * (i - 1) + 1) + spaces
     return str

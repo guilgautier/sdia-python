@@ -1,5 +1,6 @@
-from lab2.utils import get_random_number_generator
 import numpy as np
+
+from lab2.utils import get_random_number_generator
 
 
 class BoxWindow:
@@ -13,6 +14,8 @@ class BoxWindow:
         """
 
         bounds = np.array(bounds)
+        # * if np.array worked, this means that all "segments" have the same len
+        # * consider using bounds.shape
         for segment in bounds:
             assert len(segment) == 2
         self.bounds = bounds
@@ -22,6 +25,7 @@ class BoxWindow:
 
         Returns:
             String: = string returned when doing print(BoxWindow(...))
+        # ! str: not String
         """
 
         string = ""
@@ -36,19 +40,20 @@ class BoxWindow:
         """Returns the dimension of the box.
 
         Returns:
-            int : The dimension of the box
-
+            int: dimension of the box
         """
         return len(self.bounds)
 
     def __contains__(self, point):
-        """Returns true if a point is in the box.
+        """Returns True if a point is in the box.
 
         Args:
             point (numpy.array): point to test
+        # ? consistency numpy.array or np.array
 
         Returns:
             Boolean: if the point is in the box
+         # ! bool: not Boolean
         """
         assert len(point) == len(self)
 
@@ -56,14 +61,14 @@ class BoxWindow:
             if not pointIsInSegment(coord, self.bounds[i]):
                 return False
         return True
-        # better implementation:
+        # ? "better" implementation: why not using it
         # return all(a <= x <= b for(a, b), x in zip(self.bounds, point))
 
     def dimension(self):
         """Returns the dimension of the box.
 
         Returns:
-            int : The dimension of the box
+            int: dimension of the box
         """
         return len(self)
 
@@ -71,9 +76,10 @@ class BoxWindow:
         """Returns the volume of the box.
 
         Returns:
-            int: The volume of the box.
+            int: volume of the box.
         """
 
+        # * exploit numpy, use - or np.diff and np.prod
         volume = 0 if len(self) == 0 else 1
         for segment in self.bounds:
             volume *= segmentLength(segment)
@@ -82,6 +88,7 @@ class BoxWindow:
 
     def indicator_function(self, point):
         """Returns true if a point is in the box.
+        # ? how would you handle multiple points
 
         Args:
             point (numpy.array): point to test
@@ -103,7 +110,8 @@ class BoxWindow:
         """
         rng = get_random_number_generator(rng)
         point_list = []
-        for _ in range(n):
+        # * exploit numpy, rng.uniform(a, b, size=n)
+        for _ in range(n):  # * nice using "_"
             point = []
             for segment in self.bounds:
                 point.append(rng.uniform(segment[0], segment[1]))
@@ -111,6 +119,8 @@ class BoxWindow:
         return np.array(point_list)
 
 
+# * interesting helper functions
+# ! use snake case print_segment
 def printSegment(array):
     """Prints a segment using the format [float, float]
 
@@ -120,6 +130,7 @@ def printSegment(array):
     Returns:
         string: the segment printed in the correct format
     """
+    # ! use f-strings
     return "[" + str(float(array[0])) + ", " + str(float(array[1])) + "]"
 
 
@@ -145,10 +156,13 @@ def pointIsInSegment(point, segment):
     Returns:
         boolean: if the point is in the segment
     """
-    return point <= segment[1] and point >= segment[0]
+    a, b = segment
+    return a <= point and point <= b
 
 
 class UnitBoxWindow(BoxWindow):
+    # ! not implemented
+    # ! not tested
     def __init__(self, center, dimension):
         """[summary]
 
