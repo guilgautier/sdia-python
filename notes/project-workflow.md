@@ -4,9 +4,9 @@
    - **Windows:** Open Anaconda Prompt (Windows key + Anaconda prompt)
    - **MacOS:** Open Terminal (CMD + Space + Terminal)
 2. Navigate to your project folder
-   - `cd path-to-your-project`, see also "Command line basics" section in [text](./command_line.md)
+   - `cd path-to-your-project`, see also the "Command line basics" section in [command-line.md](./command-line.md#command-line-basics)
 3. Activate your virtual environment
-   - Conda, see also "Python Virtual environment with conda" in [`anaconda-vscode.md`](./anaconda-vscode.md)
+   - Conda, see also "Python Virtual environment with conda" section in [`anaconda-vscode.md`](./anaconda-vscode.md#python-virtual-environment-with-conda)
      - `conda deactivate  # deactivate current environment, most probably (base)`
      - `conda env list  # list available environment`
        - If your target environment is already available, activate it, e.g., for `sdia-python`
@@ -14,7 +14,7 @@
        - Otherwise create a new environment and then activate it
 4. Open your IDE
    - Visual Studio Code
-      - "Launch VSCode" in [`anaconda-vscode.md`](./anaconda-vscode.md)
+      - see "Launch VSCode" section in [`anaconda-vscode.md`](./anaconda-vscode.md#launch-vscode)
         - `code .`
       - Make sure your ["Python Interpreter"](https://code.visualstudio.com/docs/python/environments#_select-and-activate-an-environment) (CMD/CTRL + Maj + P -> Select interpreter) reflects your virtual environment
       - Make sure the ["Integrated Terminal"](https://code.visualstudio.com/docs/editor/integrated-terminal) (View -> Terminal) reflects your virtual environment, otherwise activate it as proposed in 3. above

@@ -29,12 +29,24 @@ Run the package test suite with
 ```bash
 # cd path-to-your-project
 # conda activate sdia-python
-pytest  # tests/ tests/lab1/ tests/lab1/test_is_unique.py
+pytest  # run all tests discovered by pytest
+# run all tests from tests/lab1/
+pytest tests/
+# run all tests from all files contained in folder tests/lab1/
+pytest tests/lab1/
+# run all tests from file tests/lab1/tests_is_unique.py
+pytest tests/lab1/test_is_unique.py
+# run specific test called "test_is_unique" from file tests/lab1/tests_is_unique.py
+pytest tests/lab1/test_is_unique.py::test_is_unique
 ```
 
 ### Exercise 1
 
 Test your code from `lab1` and make sure they all pass.
+
+### Write tests in the documentation
+
+See the [Doctests](#doctests)
 
 ## Documentation
 
@@ -89,13 +101,11 @@ To generate the documentation locally, i.e., on your machine, you can either use
   sphinx-build -b html docs docs/_build/html
   ```
 
-  and navigate the documentation
+Then, open the file [docs/_build/html/index.html](../docs/_build/html/index.html) in your favorite browser.
 
-  ```bash
-  open docs/_build/html/index.html
-  ```
+**Note:**
 
-**Note:** Any change made in the source `.py` files or the `docs/conf.py` file require rebuilding the documentation.
+- Any change made in the source `.py` files or the [`docs/conf.py`](../docs/conf.py) file require rebuilding the documentation.
 
 ### Exercise 2
 
@@ -103,3 +113,16 @@ To generate the documentation locally, i.e., on your machine, you can either use
 - Write good docstrings your code from `lab1`,
 - Generate the corresponding documentation
 - [BONUS] customize the documentation with some new sections, LaTeX, etc.
+
+### Doctests
+
+**Provided you use the `sphinx.ext.doctest` extension in your [`docs/conf.py`](../docs/conf.py) file**.
+
+Doctests, i.e., tests written in the docstrings, can be used to test and showcase your Python object/function etc.
+For an example, see the `triangle_shape` function docstring in the [lab1/functions.py](../src/lab1/functions.py) file.
+
+To run the doctests use
+
+```bash
+make --directory=docs/ doctest
+```
