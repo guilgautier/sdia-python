@@ -1,5 +1,6 @@
-from lab2.utils import get_random_number_generator
 import numpy as np
+
+from lab2.utils import get_random_number_generator
 
 
 class BoxWindow:
@@ -11,6 +12,7 @@ class BoxWindow:
         bounds:
             bounds (list): list of ranges of the box in all the directions of the space.
         """
+        # * consider np.array(bounds) to exploit numpy vectorization power
         self.bounds = bounds
 
     def __str__(self):
@@ -19,14 +21,16 @@ class BoxWindow:
         Returns:
             [string]: Writing expression of the box with its bounds.
         """
-        S = "BoxWindow: "
-        for i in range(len(self.bounds)):
+        S = "BoxWindow: "  # * convention/naming use lower case s or string
+        # * consider for i, (a, b) in enumerate(self.bounds)
+        for i in range(len(self.bounds)):  # ! iterate over self.bounds
             S += "[" + str(self.bounds[i][0]) + ", " + str(self.bounds[i][1]) + "]"
             if i != len(self.bounds) - 1:
                 S += " x "
         return S
 
     def __len__(self):
+        # ! len/dimension is not tested
         """Returns the number of dimension of the box"""
         return len(self.bounds)
 
@@ -36,6 +40,7 @@ class BoxWindow:
         args:
             args (array): list of coordinates of the point
         """
+        # * consider for (a, b), x in zip(self.bounds, point)
         for i, x in enumerate(point):
             print(self.bounds[i][0], x, self.bounds[i][1])
             if not (self.bounds[i][0] <= x <= self.bounds[i][1]):
@@ -43,11 +48,14 @@ class BoxWindow:
         return True
 
     def dimension(self):
+        # ! len/dimension is not tested
         """Returns the number of dimension of the box"""
+        # ? what does "number of dimension" mean
         return len(self)
 
     def volume(self):
         """Returns the volume of the box"""
+        # * exploit numpy vectors, use - or np.diff, and np.prod
         res = 1
         for i in range(len(self.bounds)):
             longueur = np.sqrt((self.bounds[i][1] - self.bounds[i][0]) ** 2)
@@ -60,6 +68,8 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
+        # ? how would you handle multiple points
+        # todo readability consider using "point in self"
         return self.__contains__(point)
 
     def rand(self, n=1, seed=None):
@@ -70,9 +80,11 @@ class BoxWindow:
             rng ([type], optional): generator of a random number. Defaults to None.
         """
         rng = get_random_number_generator(seed)
-        L = []
-        for i in range(n):
-            Point = []
+        # * exploit numpy, rng.uniform(a, b, size=n)
+        L = []  # * naming: use a more explicit name
+        for i in range(n):  # ! iterate over self.bounds
+            # * convention: use _ for unused counters
+            Point = []  # * convention: variables are lower cased
             for j in range(self.dimension()):
                 Point.append(rng.uniform(self.bounds[j][0], self.bounds[j][1]))
             L.append(Point)
@@ -80,6 +92,8 @@ class BoxWindow:
 
     def center(self):
         """Returns the coordinates of the center of the box"""
+        # * exploit numpy vectors, use - or np.diff, and +
+        # * same remarks as in rand function
         l = []
         for i in range(len(self.bounds)):
             l.append(round((self.bounds[i][0] + self.bounds[i][1]) / 2, 2))
@@ -90,6 +104,9 @@ class BoxWindow:
 class UnitBoxWindow(BoxWindow):
     def __init__(self, center, dimension):
         """Create a Box window with bounds of length equal to 1
+        # ? what is the default UnitBoxWindow
+        # todo consider passing default arguments
+        # todo complete the docstring
 
         Args:
             dimension (int): dimension de la boite
@@ -99,4 +116,6 @@ class UnitBoxWindow(BoxWindow):
         bounds = np.zeros((dimension, 2))
         for i in range(dimension):
             bounds[i] = [center[i] - 0.5, center[i] + 0.5]
+
+        # ! use super(UnitBoxwindow, self).__init__(bounds)
         BoxWindow.__init__(self, bounds)

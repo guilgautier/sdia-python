@@ -90,6 +90,8 @@ def test_volume(bounds, expected):
     ],
 )
 def test_unit_box(center, dimension, expected):
+    # * readability: consider creating box = UnitBoxWindow(center, dimension)
+    # * you can also use np.testing.assert_array_equal without an assert
     assert np.array_equal(UnitBoxWindow(center, dimension).bounds, expected)
 
 
