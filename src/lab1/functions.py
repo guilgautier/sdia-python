@@ -10,7 +10,24 @@ def triangle_shape(height):
     liste_print = []
     if height == 0:
         return ""
+    if height == 1:
+        return "x"
+    if height == 2:
+        return " x \nxxx"
     else:
         for i in range(height):
-            liste_print.append("x" * (2 * i + 1))
-    print(*liste_print, sep="\n")
+            if i != height - 1:
+                liste_print.append(
+                    " " * (height - i - 1)
+                    + "x" * (2 * i + 1)
+                    + " " * (height - i - 1)
+                    + "\n"
+                )
+            else:
+                liste_print.append(
+                    " " * (height - i - 1) + "x" * (2 * i + 1) + " " * (height - i - 1)
+                )
+        return "".join(liste_print)
+
+
+triangle_shape(3)
