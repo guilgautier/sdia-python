@@ -107,14 +107,7 @@ Then, open the file [docs/_build/html/index.html](../docs/_build/html/index.html
 
 - Any change made in the source `.py` files or the [`docs/conf.py`](../docs/conf.py) file require rebuilding the documentation.
 
-### Exercise 2
-
-- Edit the metadata of the package defined in [`docs/conf.py`](../docs/conf.py)
-- Write good docstrings your code from `lab1`,
-- Generate the corresponding documentation
-- [BONUS] customize the documentation with some new sections, LaTeX, etc.
-
-### Doctests
+#### Doctests
 
 **Provided you use the `sphinx.ext.doctest` extension in your [`docs/conf.py`](../docs/conf.py) file**.
 
@@ -126,3 +119,10 @@ To run the doctests use
 ```bash
 make --directory=docs/ doctest
 ```
+
+### Exercise 2
+
+- Edit the metadata of the package defined in [`docs/conf.py`](../docs/conf.py)
+- Write good docstrings your code from `lab1`,
+- Generate the corresponding documentation
+- [BONUS] customize the documentation with some new sections, LaTeX, etc.
