@@ -15,6 +15,20 @@ def triangle_shape(n, fillchar="x", spacechar=" "):
 
     For n=0, return ``""``.
 
+    .. testcode::
+
+        from lab1.functions import triangle_shape
+        print(triangle_shape(6, fillchar="x", spacechar="_"))
+
+    .. testoutput::
+
+        _____x_____
+        ____xxx____
+        ___xxxxx___
+        __xxxxxxx__
+        _xxxxxxxxx_
+        xxxxxxxxxxx
+
     Args:
         n (int): height of the triangle.
         fillchar (str, optional): Defaults to "x".
