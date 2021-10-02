@@ -45,14 +45,14 @@ class BoxWindow:
             V *= b - a
         return V
 
-    def indicator_function(self, args):
+    def indicator_function(self, point):
         """[summary]
 
         Args:
             args ([type]): [description]
         """
 
-        return 1 if self.contains(point) else 0
+        return point in self
 
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
