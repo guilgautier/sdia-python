@@ -3,22 +3,22 @@ import numpy as np
 
 
 class BoxWindow:
-    """[summary]"""
+    """[summary]BoxWindow class representing a virtual n-dimensional bounded Box
+    """
 
     def __init__(self, args):
-        """[summary]
+        """[summary]Initialization of Box's parameters
 
         Args:
-            args ([type]): [description]
+            args ([numpy array list]): [this argument represents the bounds of the box]
         """
-
         self.bounds = args
 
     def __str__(self):
-        """BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
+        """[summary] BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
 
         Returns:
-            [type]: [description]
+            [str]: [description of the Box's bounds]
         """
 
         shape = (self.bounds).shape
@@ -34,14 +34,6 @@ class BoxWindow:
                 + " x "
             )
 
-            # representation = (
-            #     representation
-            #     + np.array2string(
-            #         (self.bounds)[i], precision=2, separator=", ", suppress_small=True
-            #     )
-            #     + " x "
-            # )
-
         representation = (
             representation
             + "["
@@ -50,18 +42,26 @@ class BoxWindow:
             + str((self.bounds)[shape[0] - 1][1])
             + "]"
         )
-        # representation = representation + np.array2string(
-        #     (self.bounds)[shape[0] - 1],
-        #     precision=2,
-        #     separator=", ",
-        #     suppress_small=True,
-        # )
+
         return representation
 
     def __len__(self):
+        """[summary]
+
+        Returns:
+            [int: [the dimension of the box]
+        """
         return ((self.bounds).shape)[0]
 
     def __contains__(self, args):
+        """[summary]This method tests if an element (args) is inside the box
+
+        Args:
+            args ([numpy array list]): [the element to test]
+
+        Returns:
+            [bool]: [True if the element is inside the box , False if not]
+        """
         flag = True
         for i in range(self.__len__()):
             if args[i] >= self.bounds[i][0] and args[i] <= self.bounds[i][1]:
@@ -72,11 +72,15 @@ class BoxWindow:
         return flag
 
     def dimension(self):
-        """[summary]"""
+        """[summary]
+        This method is similar to the method __len__ described above
+        """
         return self.__len__()
 
     def volume(self):
-        """[summary]"""
+        """[summary]
+        This method calculates the volume of the Box
+        """
         v = 1
         for i in range(self.dimension()):
             v = v * abs((self.bounds[i][1] - self.bounds[i][0]))
@@ -85,52 +89,139 @@ class BoxWindow:
 
     def indicator_function(self, args):
         """[summary]
+        This method is similar to the method  __contains__  described above
 
         Args:
-            args ([type]): [description]
+            args ([numpy array list]): [the element to test]
+
+        Returns:
+            [bool]: [True if the element is inside the box , False if not]
         """
         if self.__contains__(args):
             return True
         else:
             return False
 
+    def center(self):
+        """[summary] determinate the center of the box
+
+        Returns:
+            [numpy array list]: [the center of the box]
+        """
+        c = np.zeros(self.__len__())
+        for i in range(self.__len__()):
+            c[i] = np.mean(self.bounds[i])
+        return c
+
     def rand(self, n=1, rng=None):
-        """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
+        """[summary]
+        Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
 
         Args:
             n (int, optional): [description]. Defaults to 1.
             rng ([type], optional): [description]. Defaults to None.
+
+        Returns:
+            Randomly n elements that belong to the box
         """
         rng = get_random_number_generator(rng)
         L = np.ones((n, self.__len__()))  # liste des points
+
         for i in range(n):
-            if self.__len__() == 1:
-                L[i] = (1 - rng.random()) * self.bounds[0] + rng.random() * self.bounds[
-                    1
-                ]
+            for j in range(self.__len__()):
+                x = rng.random()
 
-            elif self.__len__() != 1:
-                for j in range(self.__len__()):
-
-                    L[i][j] = (1 - rng.random()) * self.bounds[j][
-                        0
-                    ] + rng.random() * self.bounds[j][1]
+                L[i][j] = (1 - x) * self.bounds[j][0] + x * self.bounds[j][1]
 
         return L
 
 
 class UnitBoxWindow(BoxWindow):
     def __init__(self, center, dimension):
-        """[summary]
+        """[summary]a subclass of BoxWindow,represents the notion of "unit square box"
 
         Args:
-            dimension ([type]): [description]
-            center ([type], optional): [description]. Defaults to None.
+            dimension ([int]): [dimension of the Unit Box]
+            center ([numpy array list], optional): [center of the Box].
         """
-        super(BoxWindow, self).__init__(args)
+        self.bounds = np.array(
+            [[center[i] - 0.5, center[i] + 0.5] for i in range(dimension)]
+        )
+        super().__init__(self.bounds)
 
 
-bounds = np.array([[0.5, 0.7], [0.5, 0.7]])
-box = BoxWindow(bounds)
+class BallWindow:
+    """[summary]BoxWindow class representing a virtual n-dimensional bounded Box
+    """
 
-print(box.rand(n=1))
+    def __init__(self, center, radius, dimension):
+        """[summary]Initialization of Box's parameters
+
+        Args:
+            args ([numpy array list]): [this argument represents the bounds of the box]
+        """
+        self.dim = dimension
+        self.rad = radius
+        self.cent = center
+
+    def __contains__(self, args):
+        """[summary]This method tests if an element (args) is inside the ball
+
+        Args:
+            args ([numpy array list]): [the element to test]
+
+        Returns:
+            [bool]: [True if the element is inside the ball , False if not]
+        """
+        flag = True
+        if len(args) != self.dim:
+            return False
+        else:
+            if np.linalg.norm(args - self.center) <= self.rad:
+                flag = True
+
+        return flag
+
+    def dimension(self):
+        """[summary]
+        This method gives the dimension of the ball
+        """
+        return self.dim
+
+    def volume(self):
+        """[summary]
+        This method calculates the volume of the Ball using the formula :math:' $V_{n+1} =\int_{-r}^{r}V_{n}(\sqrt{r^2 -x^2})dx$ '
+        """
+
+        v = 1
+        for i in range(self.dimension()):
+            integ = lambda x: v * np.sqrt(self.rad ** 2 - x ** 2)
+            v = integrate.quad(integ, -self.rad, self.rad)
+
+        return v
+
+    def indicator_function(self, args):
+        """[summary]
+        This method is similar to the method  __contains__  described above
+
+        Args:
+            args ([numpy array list]): [the element to test]
+
+        Returns:
+            [bool]: [True if the element is inside the ball , False if not]
+        """
+        if self.__contains__(args):
+            return True
+        else:
+            return False
+
+    def center(self):
+        """[summary] determinate the center of the ball
+
+        Returns:
+            [numpy array list]: [the center of the ball]
+        """
+        c = np.zeros(self.__len__())
+        for i in range(self.__len__()):
+            c[i] = np.mean(self.bounds[i])
+        return c
