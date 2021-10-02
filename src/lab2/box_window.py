@@ -1,6 +1,6 @@
-from lab2.utils import get_random_number_generator
+import numpy as np
 
-# import numpy as np
+from lab2.utils import get_random_number_generator
 
 
 class BoxWindow:
