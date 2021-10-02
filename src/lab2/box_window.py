@@ -19,7 +19,27 @@ class BoxWindow:
         Returns:
             [type]: [description]
         """
-        return ""
+        string = "BoxWindow: "
+        dim = self.dimension()
+        i = 0
+
+        for list in self.bounds:
+
+            a = list[0]
+            b = list[1]
+            if a.dtype == "float64" and a.is_integer():
+                a = int(a)
+            if b.dtype == "float64" and b.is_integer():
+                b = int(b)
+
+            if i == dim - 1:
+                string += "[" + str(a) + ", " + str(b) + "]"
+
+            else:
+                string += "[" + str(a) + ", " + str(b) + "]" + " x "
+            i += 1
+
+        return string
 
     def __len__(self):
         return
@@ -29,7 +49,7 @@ class BoxWindow:
         bounds = self.bounds
         dim = self.dimension()
         for i in range(dim):
-            if not dim[i][0] <= point[i] <= dim[i][1]:
+            if not bounds[i][0] <= point[i] <= bounds[i][1]:
                 return False
 
         return True
