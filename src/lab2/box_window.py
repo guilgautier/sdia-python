@@ -72,4 +72,8 @@ class UnitBoxWindow(BoxWindow):
             dimension ([type]): [description]
             center ([type], optional): [description]. Defaults to None.
         """
+<<<<<<< HEAD
         super(BoxWindow, self).__init__(center)
+=======
+        super(UnitBoxWindow, self).__init__(bounds)
+>>>>>>> 8b6e677be189599065f3c5076500fcfe1e3d736e
