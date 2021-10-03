@@ -1,4 +1,4 @@
-from lab2.utils import get_random_number_generator
+from lab2.utils import get_random_number_generator, np
 
 
 class BoxWindow:
@@ -71,7 +71,10 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
+<<<<<<< HEAD
 
+=======
+>>>>>>> d9f6fe079c2404c909d51649e845091445af26c3
         return point in self
 
     def rand(self, n=1, rng=None):
@@ -97,4 +100,8 @@ class UnitBoxWindow(BoxWindow):
             dimension ([type]): [description]
             center ([type], optional): [description]. Defaults to None.
         """
-        super(BoxWindow, self).__init__(args)
+<<<<<<< HEAD
+        super(BoxWindow, self).__init__(center)
+=======
+        super(UnitBoxWindow, self).__init__(bounds)
+>>>>>>> 8b6e677be189599065f3c5076500fcfe1e3d736e
