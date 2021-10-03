@@ -3,11 +3,11 @@ import numpy as np
 
 
 class BoxWindow:
-    """[summary]"""
+    """La classe BoxWindow crée une"""
 
     def __init__(self, bounds):
         """La méthode init prend en argument les dimensions et crée une box window.
-        On crée l'attribut bounds de la classe BoxWindow
+        On crée l'attribut bounds de la classe BoxWindow.
 
         Args:
             args ([type]): [description]
@@ -16,54 +16,54 @@ class BoxWindow:
 
         self.bounds = np.array(bounds)
 
-
     def __str__(self):
-        r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
+        """BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
 
         Returns:
             [type]: [description]
         """
-        box="BoxWindow "
-        for i in range (len(self.bounds)):
-        return ""
+        b = "BoxWindow: "
+        for i in range(self.bounds.shape[0]):
+            b = b + f"{self.bounds[i]} x "
+        return b[:-3]
 
-    def __len__(self):
+    def shape(self):
         """Méthode qui permet de connaître la dimension de la box. La dimension est la shape de l'array. Dimension de bounds * 2.
         Le premier return permet d'avoir la première dimension."""
-        return self.bounds.shape[0]
-        return len(self.bounds)
+        return f"{self.bounds.shape[0]} x 2"
 
-    def __contains__(self, point):
+    def contains(self, point):
         """Point in box ? """
         """ On pourrait vérifier que le point est à la bonne dimension, il doit être de la même taille que les bounds. On peut le faire avec un assert"""
-        assert len(point) == len(self)
 
         """ on peut itérer sur l'objet directement, pas de range(len(...))"""
 
-        for (a,b), x in zip(self.bounds, point):
+        for (a, b), x in zip(self.bounds, point):
             if not (a <= x <= b):
                 return False
         return True
 
-
-        a= self.bounds[:, 0]
-        b=self.bounds[:, 1]
-        return np.all (np.logical_and(a <= point, point <= b))
-
-
-        return(all(a <= x <= b for (a,b), x in zip(self.bounds, point)))
-
-
-
-
-
     def dimension(self):
         """"""
-        return
+        return {self.bounds.shape[0]}
+
+    def lenght(self):
+        "This method return the lenght for each dimension of the BoxWindow."
+
+        l = []
+        for i in range(self.bounds.shape[0]):
+            l = l + [self.bounds[i, 1] - self.bounds[i, 0]]
+        return l
 
     def volume(self):
-        """[summary]"""
-        return
+        """ It returns the lenght if the BoxWindow has 1 dimension, an area if 2 dimensions and the volume for 3 dimensions"""
+
+        if self.dimension == 1:
+            return f"Lenght = {self.lenght()[0]}"
+        elif self.dimension == 2:
+            return f"Area =  {self.lenght()[0] * self.lenght()[1]}"
+        else:
+            return f"Volume =  {self.lenght()[0] * self.lenght()[1] * self.lenght()[2]}"
 
     def indicator_function(self, args):
         """ Fonction indicatrice d'un ensemble, on veut avoir en entrée plusieurs points et que la fonction nous renvoie une liste avec True, False, True etc , si le point est dans la box ou non.
@@ -71,7 +71,11 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
-        return
+        a = []
+        for i in range(len(args)):
+            a = a + [self.contains(args[i])]
+
+        return a
 
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
