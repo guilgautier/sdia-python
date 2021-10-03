@@ -92,4 +92,4 @@ class UnitBoxWindow(BoxWindow):
             dimension ([type]): [description]
             center ([type], optional): [description]. Defaults to None.
         """
-        super(BoxWindow, self).__init__(args)
+        super(UnitBoxWindow, self).__init__(bounds)
