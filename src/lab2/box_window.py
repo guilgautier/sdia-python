@@ -1,4 +1,4 @@
-from lab2.utils import get_random_number_generator
+from lab2.utils import get_random_number_generator, np
 
 
 class BoxWindow:
@@ -48,7 +48,7 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
-        return 1 if self.contains(point) else 0
+        return point in self
 
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
@@ -72,4 +72,4 @@ class UnitBoxWindow(BoxWindow):
             dimension ([type]): [description]
             center ([type], optional): [description]. Defaults to None.
         """
-        super(BoxWindow, self).__init__(args)
+        super(BoxWindow, self).__init__(center)
