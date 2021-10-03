@@ -29,20 +29,15 @@ def test_box_string_representation(bounds, expected):
 
 @pytest.fixture
 def box_2d_05():
-    return BoxWindow(np.array([[0, 5], [0, 5]]))
+    return BoxWindow([[0, 5], [0, 5]])
 
 
 @pytest.mark.parametrize(
     "point, expected",
-    [
-        (np.array([0, 0]), True),
-        (np.array([2.5, 2.5]), True),
-        (np.array([-1, 5]), False),
-        (np.array([10, 3]), False),
-    ],
+    [([0, 0], True), ([2.5, 2.5], True), ([-1, 5], False), ([10, 3], False),],
 )
 def test_indicator_function_box_2d(box_2d_05, point, expected):
-    box = BoxWindow(np.array([[0, 5], [0, 5]]))
+    box = BoxWindow([[0, 5], [0, 5]])
     is_in = box.indicator_function(point)
     assert is_in == expected
 
@@ -50,3 +45,9 @@ def test_indicator_function_box_2d(box_2d_05, point, expected):
 # ================================
 # ==== WRITE YOUR TESTS BELOW ====
 # ================================
+@pytest.mark.parametrize(
+    "bounds, expected", [([[2, 4], [1, 3]], [3, 2])],
+)
+def test_center_function_box_2d(bounds, expected):
+    box = BoxWindow(bounds)
+    assert box.center == expected
