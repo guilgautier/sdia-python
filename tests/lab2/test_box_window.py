@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from lab2.box_window import BoxWindow
+from lab2.box_window import BoxWindow, UnitBoxWindow
 
 
 def test_raise_type_error_when_something_is_called():
@@ -58,7 +58,7 @@ def test_init():
     "bounds, expected",
     [
         (np.array([[0, 5], [-1.45, 3.14], [-10, 10]]), (3, 2)),
-        (np.array([2.5, 2.5]), (1, 2)),
+        (np.array([[2.5, 2.5]]), (1, 2)),
     ],
 )
 def test_init2(bounds, expected):
@@ -75,7 +75,7 @@ def test_len():
     "bounds, expected",
     [
         (np.array([[0, 5], [0, 5]]), [5, 5]),
-        (np.array([2.5, 2.5]), [0]),
+        (np.array([[2.5, 2.5]]), [0]),
     ],
 )
 def test_len2(bounds, expected):
@@ -117,7 +117,7 @@ def test_dimension():
     "bounds, expected",
     [
         (np.array([[0, 5], [0, 5]]), 2),
-        (np.array([2.5, 2.5]), 1),
+        (np.array([[2.5, 2.5]]), 1),
     ],
 )
 def test_dimension2(bounds, expected):
@@ -134,12 +134,16 @@ def test_volume():
     "bounds, expected",
     [
         (np.array([[0, 5], [0, 5]]), 25),
-        (np.array([2.5, 2.5]), 0),
+        (np.array([[2.5, 2.5]]), 0),
     ],
 )
 def test_volume2(bounds, expected):
     c = BoxWindow(bounds)
     assert c.volume() == expected
+
+
+
+
 
 
 def test_indicator_function():
@@ -167,18 +171,25 @@ def test_indicator_function2(box_2d_05, point, expected):
     assert is_in == expected
 
 
+
+
 def test_rand():
     c = BoxWindow(np.array([[0, 5], [-1.45, 3.14], [-10, 10]]))
-    assert c.__contains__(c.rand(1)) == True
+    assert c.__contains__(c.rand(1)[0]) == True
 
 
 @pytest.mark.parametrize(
     "bounds, expected",
     [
         (np.array([[0, 5], [0, 5]]), True),
-        (np.array([2.5, 2.5]), True),
+        (np.array([[2.5, 2.5]]), True),
     ],
 )
 def test_rand2(bounds, expected):
     c = BoxWindow(bounds)
-    assert c.__contains__(c.rand(1)) == expected
+    assert c.__contains__(c.rand(1)[0]) == expected
+
+
+def test_UnitBoxWindow_init():
+    d=UnitBoxWindow(np.array([2,3]),2)
+    assert d.__len__() == [1.0,1.0]

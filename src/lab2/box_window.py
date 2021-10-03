@@ -20,9 +20,16 @@ class BoxWindow:
         Returns:
             str : give the bounds of the box
         """
+
+        def remove_zero(w):
+            if int(w)==w:
+                return int(w)
+            else:
+                return(w)
+
         mot = ""
-        for [a, b] in self.bounds:
-            mot = mot + str([a, b]) + " x "
+        for (a, b) in self.bounds:
+            mot = mot + str([remove_zero(a), remove_zero(b)]) + " x "
         return "BoxWindow: " + mot[:-3]
 
     def __len__(self):
@@ -93,7 +100,7 @@ class BoxWindow:
                 else:
                     L_petit.append(np.random.uniform(b - a) + a)
             L.append(L_petit)
-        return L
+        return np.array(L)
 
 
 # heritage
@@ -102,7 +109,15 @@ class UnitBoxWindow(BoxWindow):
         """[summary]
 
         Args:
-            dimension ([type]): [description]
-            center ([type], optional): [description]. Defaults to None.
+            dimension ([integer]): dimension of the box window
+            center (np.array()): Array de taille de la dimension. Chaque élément correspond au centre d'un segment de la boite. Defaults to None.
         """
-        super(BoxWindow, self).__init__(args)
+        self.center =center
+        self.dimension=dimension
+
+        bounds=[]
+        for k in range(dimension):
+            bounds.append([center[k]-0.5,center[k]+0.5])
+        bounds=np.array(bounds)
+
+        super(UnitBoxWindow, self).__init__(bounds)
