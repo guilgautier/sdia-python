@@ -73,7 +73,7 @@ class BoxWindow:
         for i in range(0, n):
             a = Box_args[i][1]
             b = Box_args[i][0]
-            if args[i][0] < b or arg[i][1] > a:
+            if args[i] < b or arg[i] > a:
                 return False
         return True
 
