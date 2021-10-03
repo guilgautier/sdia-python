@@ -1,5 +1,6 @@
 from lab2.utils import get_random_number_generator
 import numpy as np
+from math import *
 
 
 class BoxWindow:
@@ -120,5 +121,29 @@ class UnitBoxWindow(BoxWindow):
             L.append([center[i] - 0.5, center[i] + 0.5])
         super().__init__(L)
 
-class BallWindow(BoxWindow):
-    def __init__()
+
+class BallWindow:
+    def __init__(self, center, radius):
+        self.center = center
+        self.radius = radius
+
+    def dimension(self):
+        return len(self.center)
+
+    def __contains__(self, point):
+        s = 0
+        for i in range(dimension):
+            s += (point[i] - self.center[i]) ** 2
+        if s <= (self.radius) ** 2:
+            return True
+        return False
+
+    def area(self):
+        n = len(self.center)
+        R = self.radius
+        return 2 * (pi) ** (n / 2) * R ** (n - 1) / gamma(n / 2)
+
+    def volume(self):
+        n = len(self.center)
+        R = self.radius
+        return (pi) ** (n / 2) * R ** (n) / gamma(n / 2 + 1)
