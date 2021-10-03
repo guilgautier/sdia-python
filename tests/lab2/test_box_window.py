@@ -31,12 +31,12 @@ def box_2d_05():
 
 
 @pytest.mark.parametrize(
-    "point, expected",
+    "box,point, expected",
     [
-        (np.array([0, 0]), True),
-        (np.array([2.5, 2.5]), True),
-        (np.array([-1, 5]), False),
-        (np.array([10, 3]), False),
+        (box_2d_05(), np.array([0, 0]), True),
+        (box_2d_05(), np.array([2.5, 2.5]), True),
+        (box_2d_05(), np.array([-1, 5]), False),
+        (box_2d_05(), np.array([10, 3]), False),
     ],
 )
 def test_indicator_function_box_2d(box_2d_05, point, expected):

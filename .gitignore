@@ -274,3 +274,4 @@ $RECYCLE.BIN/
 __pycache__*
 tp2/img*
 *.zip
+.vscode/settings.json
