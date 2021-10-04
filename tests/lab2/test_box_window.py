@@ -44,6 +44,47 @@ def test_indicator_function_box_2d(box_2d_05, point, expected):
     assert is_in == expected
 
 
+@pytest.mark.parametrize(
+    "listofpoint, expected",
+    [(np.array([[0, 0], [2.5, 2.5], [-1, 5], [10, 3]]), [True, True, False, False]),],
+)
+def test_indicator_function_several_box_2d(box_2d_05, listofpoint, expected):
+    is_in = box_2d_05.indicator_function(listofpoint)
+    assert is_in == expected
+
+
+@pytest.mark.parametrize(
+    "bounds, expected",
+    [(np.array([1, 2]), "Volume = 1"), (np.array([[1, 3], [2, 3]]), "Volume = 2"),],
+)
+def test_volume(bounds, expected):
+    assert (BoxWindow(bounds).volume()) == expected
+
+
+@pytest.mark.parametrize(
+    "bounds, expected",
+    [
+        (np.array([[2.5, 2.5]]), 0),
+        (np.array([[0, 20], [-10, -6], [-5, 5]]), 800),
+        (np.array([[0, 0], [0, 0], [-10, 10]]), 0),
+    ],
+)
+def test_box_volume(bounds, expected):
+    assert BoxWindow(bounds).volume() == expected
+
+
+@pytest.mark.parametrize(
+    "bounds, expected",
+    [
+        (np.array([[2.5, 2.5]]), [2.5]),
+        (np.array([[0, 20], [-10, -6], [-5, 5]]), [10, -8, 0]),
+        (np.array([[0, 0], [0, 0], [-10, 10]]), [0, 0, 0]),
+    ],
+)
+def test_box_center(bounds, expected):
+    assert BoxWindow(bounds).center() == expected
+
+
 # ================================
 # ==== WRITE YOUR TESTS BELOW ====
 # ================================
