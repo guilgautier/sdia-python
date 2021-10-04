@@ -3,7 +3,7 @@ import numpy as np
 
 
 class BoxWindow:
-    """[summary]"""
+    """Class that creates BoxWindows in any dimension."""
 
     def __init__(self, boundsArg):
         """Initialize the BoxWindows from the bounds given in the array.
@@ -17,7 +17,7 @@ class BoxWindow:
         """Display the BoxWindow in a string
 
         Returns:
-            [string]: BoxWindows points coordinates
+            string: BoxWindows points coordinates
         """
         description = "BoxWindow: "
         for i in range(len(self.bounds)):
@@ -28,7 +28,7 @@ class BoxWindow:
         """Returns the dimension of the space of the BoxWindow
 
         Returns:
-            [int]: size of the space containing the BoxWindow
+            int: size of the space containing the BoxWindow
         """
         return self.bounds.shape[0]
 
@@ -37,44 +37,47 @@ class BoxWindow:
         Assertion error if the dimension of the point is not equal to the dimension of the BoxWindow
 
         Args:
-            point (np.array): [list of coordinates]
+            point (np.array): list of coordinates
 
         Returns:
-            [boolean]: [True if the point is inside, else returns False]
+            boolean: True if the point is inside, else returns False
         """
         assert len(point) == len(self) ##Test if the point has the same dimension
+        
+        a = self.bounds[:, 0]
+        b = self.bounds[:, 1]
+        return np.all(np.logical_and(a <= point, point <= b))
+        '''
+        #Solution that allows to stop as soon as we find a False
         dim = len(self)
         for i in range(dim):
             a = self.bounds[i, :]
             if a[0] > point[i] or a[1] < point[i]:
                 return False 
-        return True
+        return True'''
 
     def dimension(self):
-        """[summary]"""
+        """Gives the dimension of the BoxWindows"""
         return len(self)
 
     def volume(self):
         """Gives the volume of the BoxWindow
 
         Returns:
-            [int]: [volume]
+            int: volume
         """
-        dim = len(self)
-        volume = 1
-        for i in range(0, dim):
-            long = abs(self.bounds[i][0] - self.bounds[i][1])
-            volume = volume * long
-        return volume
+        a = self.bounds[:, 0]
+        b = self.bounds[:, 1]
+        return np.prod(abs(b-a))
 
     def indicator_function(self, array_points):
         """Gives the result of the indicator function of the BoxWindows given some points of the same dimension
 
         Args:
-            args ([int]): 1 if the argument is inside the BoxWindow, else 0
+            args (int): 1 if the argument is inside the BoxWindow, else 0
         """
         if len(array_points.shape) > 1:
-            return [int(p in self) for p in array_points]
+            return np.array([int(p in self) for p in array_points])
         return int(array_points in self)
 
     
@@ -82,17 +85,20 @@ class BoxWindow:
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
 
         Args:
-            n (int, optional): [description]. Defaults to 1.
-            rng ([type], optional): [description]. Defaults to None.
+            n (int, optional): Number of random points to generate. Defaults to 1.
+            rng (type, optional): Defaults to None.
         
-        Returns:
+        Returns: array which contains n points randomly uniformly generated
 
-        """
-        dim = len(self)
-        #for i in range(dim):
-            
+        """ 
+        dim = len(self)           
         rng = get_random_number_generator(rng)
-        return
+        
+        a = self.bounds[:, 0]
+        b = self.bounds[:, 1]
+        
+        res = rng.uniform(a, b, (n, dim))
+        return res 
 
 
 class UnitBoxWindow(BoxWindow):
@@ -108,5 +114,5 @@ class UnitBoxWindow(BoxWindow):
         bounds[:, 0], bounds[:, 1] = center - 0.5, center + 0.5
         super(UnitBoxWindow, self).__init__(bounds)
     
-    ##Remarque sur la fonction : le center est un entier !! or en dim 2, on devrait avoir deux coordonnées
+    
     

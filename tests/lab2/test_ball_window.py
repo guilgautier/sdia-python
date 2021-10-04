@@ -42,7 +42,7 @@ def test_dim_ballWindow(center, radius, expected):
     [
         ([2, 2.5], True),
         ([0, 5], False),
-        ([3, 2.5], True)
+        ([3.5, 2.5], True)
     ],
 )   
 def test_contains_ball_2d_r3(ball_2d_r3,point, expected):
@@ -51,13 +51,16 @@ def test_contains_ball_2d_r3(ball_2d_r3,point, expected):
 @pytest.mark.parametrize(
     "point, expected",
     [
-        (np.array([[2, 2.5], [0, 10]]), [1, 0]),
-        (np.array([[0, 2.5], [2, 2]]), [0, 1]),
+        (np.array([[2, 2.5], [0, 10]]), np.array([1, 0])),
+        (np.array([[0, 2.5], [2, 2]]), np.array([0, 1])),
         (np.array([3, 2.5]), True)
     ],
 )   
 def test_indicator_function_ball_2d_r3(ball_2d_r3,point, expected):
-    assert (ball_2d_r3.indicator_function(point)) == expected 
+    assert np.all(ball_2d_r3.indicator_function(point) == expected)
     
 def test_volume_ball_2d_3r(ball_2d_r3):
-    assert ball_2d_r3.volume() == pi 
+    assert round(ball_2d_r3.volume(), 10) == round(pi, 10) 
+    
+def test_random_ball_2d_3r(ball_2d_r3):
+    assert np.all(ball_2d_r3.indicator_function(ball_2d_r3.rand(n=10)))

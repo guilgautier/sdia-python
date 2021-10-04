@@ -1,6 +1,7 @@
 import numpy as np
 import numpy.linalg as la
 from math import gamma
+from lab2.utils import get_random_number_generator
 
 
 class BallWindow:
@@ -67,7 +68,26 @@ class BallWindow:
             args ([int]): 1 if the argument is inside the BallWindow, else 0
         """
         if len(array_points.shape) > 1:
-            return [int(p in self) for p in array_points]
+            return np.array([int(p in self) for p in array_points])
         return int(array_points in self)
 
+    def rand(self, n=1, rng=None):
+        """Generate ``n`` points uniformly at random inside the :py:class:`BallWindow`.
+
+        Args:
+            n (int, optional): Number of random points to generate. Defaults to 1.
+            rng (type, optional): Defaults to None.
+        
+        Returns: array which contains n points randomly uniformly generated
+
+        """ 
+        dim = len(self)           
+        rng = get_random_number_generator(rng)
+        r = self.radius
+        res = rng.uniform(0, 1, (n, dim))
+        normalis = np.apply_along_axis(np.linalg.norm, axis= 0, arr=res)
+        res = res / normalis 
+        dist = rng.uniform(-r, r, (n, 1) )
+        res = res * dist 
+        return res + self.center  
     

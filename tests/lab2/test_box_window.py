@@ -84,12 +84,16 @@ def test_indicator_function_box_3d(box_3d_05, point, expected):
 @pytest.mark.parametrize(
     "point, expected",
     [
-        (np.array([[0, 0, 0], [1, 2, 4]]), [1, 1]),
-        (np.array([[2.5, 2.5, 2.5], [2, 2, 2]]), [1, 1]),
-        (np.array([[-1, 5, 5], [2, 3, 5]]), [0, 1]),
-        (np.array([[0, 3, 7], [0, 5, 10]]), [0, 0]),
+        (np.array([[0, 0, 0], [1, 2, 4]]), np.array([1, 1])),
+        (np.array([[2.5, 2.5, 2.5], [2, 2, 2]]), np.array([1, 1])),
+        (np.array([[-1, 5, 5], [2, 3, 5]]), np.array([0, 1])),
+        (np.array([[0, 3, 7], [0, 5, 10]]), np.array([0, 0])),
     ],
 )
 def test_indicator_function_multiple_box_3d(box_3d_05, point, expected):
     is_in = box_3d_05.indicator_function(point)
-    assert is_in == expected
+    assert np.all(is_in == expected)
+    
+
+def test_random_generator_box_3d(box_3d_05):
+    assert np.all(box_3d_05.indicator_function(box_3d_05.rand(n=10)))
