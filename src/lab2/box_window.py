@@ -44,7 +44,7 @@ class BoxWindow:
         for i in range(len(point)):
             if not (self.bounds[i][0] <= point[i] <= self.bounds[i][1]):
                 return False
-        return False
+        return True
 
     def dimension(self):
         """[On donne la dimension mathématique de la boite]"""
@@ -86,13 +86,3 @@ class UnitBoxWindow(BoxWindow):
             center ([type], optional): [description]. Defaults to None.
         """
         super(BoxWindow, self).__init__(args)
-
-
-# a = BoxWindow([[1, 2], [5, 8]])
-# print((0.5, 6) in a)
-# def box_2d_05():
-# return BoxWindow(np.array([[0, 5], [0, 5]]))
-
-
-# print(box_2d_05().indicator_function((0, 4)) == True)
-# print(box_2d_05().__contains__((np.array([2.5, 2.5]))))
