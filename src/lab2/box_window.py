@@ -1,10 +1,11 @@
-from lab2.utils import get_random_number_generator
 import numpy as np
 
+from lab2.utils import get_random_number_generator
 
+
+# todo clean up the docstrings
 class BoxWindow:
-    """[summary]BoxWindow class representing a virtual n-dimensional bounded Box
-    """
+    """[summary]BoxWindow class representing a virtual n-dimensional bounded Box"""
 
     def __init__(self, args):
         """[summary]Initialization of Box's parameters
@@ -23,7 +24,9 @@ class BoxWindow:
 
         shape = (self.bounds).shape
         representation = "BoxWindow: "
-        for i in range(shape[0] - 1):
+        # * consider for a, b in self.bounds
+        # ! use f-strings
+        for i in range(shape[0] - 1):  # ? why not self.dimension()
             representation = (
                 representation
                 + "["
@@ -51,7 +54,7 @@ class BoxWindow:
         Returns:
             [int: [the dimension of the box]
         """
-        return ((self.bounds).shape)[0]
+        return ((self.bounds).shape)[0]  # * no need to use ()
 
     def __contains__(self, args):
         """[summary]This method tests if an element (args) is inside the box
@@ -62,27 +65,33 @@ class BoxWindow:
         Returns:
             [bool]: [True if the element is inside the box , False if not]
         """
+        # * consider for (a, b), x in zip(self.bounds, point)
+        # * or exploit numpy vectorization power
         flag = True
-        for i in range(self.__len__()):
+        for i in range(self.__len__()):  # ? use len(self) of self.dimension
             if args[i] >= self.bounds[i][0] and args[i] <= self.bounds[i][1]:
                 flag = True
             else:
                 return False
 
-        return flag
+        return flag  # ? flag is never modified and always returns True
 
+    # todo write tests
     def dimension(self):
         """[summary]
         This method is similar to the method __len__ described above
         """
-        return self.__len__()
+        return self.__len__()  # ? why not using use len(self)
 
+    # todo write tests
     def volume(self):
         """[summary]
         This method calculates the volume of the Box
         """
         v = 1
+        # * exploit numpy vectors, use - or np.diff, and np.prod
         for i in range(self.dimension()):
+            # * use *= operator
             v = v * abs((self.bounds[i][1] - self.bounds[i][0]))
 
         return v
@@ -97,6 +106,7 @@ class BoxWindow:
         Returns:
             [bool]: [True if the element is inside the box , False if not]
         """
+        # ? isn't it equivalent to return args in self
         if self.__contains__(args):
             return True
         else:
@@ -108,6 +118,8 @@ class BoxWindow:
         Returns:
             [numpy array list]: [the center of the box]
         """
+        # * Nice try!
+        # ? how about np.mean(self.bounds)
         c = np.zeros(self.__len__())
         for i in range(self.__len__()):
             c[i] = np.mean(self.bounds[i])
@@ -125,8 +137,9 @@ class BoxWindow:
             Randomly n elements that belong to the box
         """
         rng = get_random_number_generator(rng)
+        # ? readability why not using self.dimension()
         L = np.ones((n, self.__len__()))  # liste des points
-
+        # * exploit numpy, rng.uniform(a, b, size=n)
         for i in range(n):
             for j in range(self.__len__()):
                 x = rng.random()
@@ -144,15 +157,16 @@ class UnitBoxWindow(BoxWindow):
             dimension ([int]): [dimension of the Unit Box]
             center ([numpy array list], optional): [center of the Box].
         """
+        # * exploit numpy vectors, use - or np.diff, and +
         self.bounds = np.array(
             [[center[i] - 0.5, center[i] + 0.5] for i in range(dimension)]
         )
-        super().__init__(self.bounds)
+        super().__init__(self.bounds)  # * Nice call to super
 
 
+# todo write tests
 class BallWindow:
-    """[summary]BoxWindow class representing a virtual n-dimensional bounded Box
-    """
+    """[summary]BoxWindow class representing a virtual n-dimensional bounded Box"""
 
     def __init__(self, center, radius, dimension):
         """[summary]Initialization of Box's parameters
@@ -173,6 +187,7 @@ class BallWindow:
         Returns:
             [bool]: [True if the element is inside the ball , False if not]
         """
+        # * same remarks as in BoxWindow.__contains__
         flag = True
         if len(args) != self.dim:
             return False
@@ -189,14 +204,16 @@ class BallWindow:
         return self.dim
 
     def volume(self):
-        """[summary]
-        This method calculates the volume of the Ball using the formula :math:' $V_{n+1} =\int_{-r}^{r}V_{n}(\sqrt{r^2 -x^2})dx$ '
+        r"""[summary]
+        This method calculates the volume of the Ball using the formula :math:` V_{n+1} =\int_{-r}^{r}V_{n}(\sqrt{r^2 -x^2})dx`
         """
-
+        # * iteresting recursive try
+        # todo test the method
+        # * exploit numpy vectors, use - or np.diff, and np.prod
         v = 1
         for i in range(self.dimension()):
             integ = lambda x: v * np.sqrt(self.rad ** 2 - x ** 2)
-            v = integrate.quad(integ, -self.rad, self.rad)
+            v = integrate.quad(integ, -self.rad, self.rad)  # ! integrate is not defined
 
         return v
 
@@ -210,6 +227,7 @@ class BallWindow:
         Returns:
             [bool]: [True if the element is inside the ball , False if not]
         """
+        # ? isn't it equivalent to return args in self
         if self.__contains__(args):
             return True
         else:
@@ -221,6 +239,9 @@ class BallWindow:
         Returns:
             [numpy array list]: [the center of the ball]
         """
+        # * interesting try
+        # * exploit numpy vectorization power
+        # ? how about np.mean(self.bounds)
         c = np.zeros(self.__len__())
         for i in range(self.__len__()):
             c[i] = np.mean(self.bounds[i])
