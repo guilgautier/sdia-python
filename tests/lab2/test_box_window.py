@@ -91,5 +91,5 @@ def test_indicator_function_box_3d(box_3d_05, point, expected):
     ],
 )
 def test_indicator_function_multiple_box_3d(box_3d_05, point, expected):
-    is_in = box_3d_05.indicator_function_multiple_points(point)
+    is_in = box_3d_05.indicator_function(point)
     assert is_in == expected

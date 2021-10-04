@@ -67,22 +67,16 @@ class BoxWindow:
             volume = volume * long
         return volume
 
-    def indicator_function(self, point):
-        """Gives the result of the indicator fonction of the BoxWindows given one point
+    def indicator_function(self, array_points):
+        """Gives the result of the indicator function of the BoxWindows given some points of the same dimension
 
         Args:
             args ([int]): 1 if the argument is inside the BoxWindow, else 0
         """
-        if point in self:
-            return 1
-        return 0
+        if len(array_points.shape) > 1:
+            return [int(p in self) for p in array_points]
+        return int(array_points in self)
 
-    def indicator_function_multiple_points(self, array_points):
-        nb_points = array_points.shape[1]
-        indicator = []
-        for i in range(nb_points-1):
-            indicator.append(int(self.indicator_function(array_points[i])))
-        return indicator
     
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
@@ -103,10 +97,16 @@ class BoxWindow:
 
 class UnitBoxWindow(BoxWindow):
     def __init__(self, center, dimension):
-        """[summary]
+        """Initialize a BoxWindow which is centered around the center given (default = 0) 
+        and in the dimension given (default = 2)
 
         Args:
-            dimension ([type]): [description]
-            center ([type], optional): [description]. Defaults to None.
+            dimension ([int]): dimension expected of the BoxWindow
+            center ([type], optional): . Defaults to None.
         """
-        # super(BoxWindow, self).__init__(args)
+        bounds = np.zeros((dimension, 2))
+        bounds[:, 0], bounds[:, 1] = center - 0.5, center + 0.5
+        super(UnitBoxWindow, self).__init__(bounds)
+    
+    ##Remarque sur la fonction : le center est un entier !! or en dim 2, on devrait avoir deux coordonnées
+    
