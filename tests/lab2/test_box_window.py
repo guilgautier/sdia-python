@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 
 from lab2.box_window import BoxWindow
+from lab2.box_window import UnitBoxWindow
 
 
 def test_raise_type_error_when_points_is_not_an_array():
@@ -114,3 +115,29 @@ def test_rand_multiplepoint_3dimension():
     coord = box.rand(100)
     for value in coord:
         assert box.__contains__(value)
+
+
+@pytest.mark.parametrize(
+    "dimension, expected",
+    [
+        (1, "BoxWindow: [-0.5, 0.5]"),
+        (2, "BoxWindow: [-0.5, 0.5] x [-0.5, 0.5]"),
+        (3, "BoxWindow: [-0.5, 0.5] x [-0.5, 0.5] x [-0.5, 0.5]",),
+    ],
+)
+def test_UnitBoxWindow(dimension, expected):
+    unitBox = UnitBoxWindow(dimension)
+    assert unitBox.__repr__() == expected
+
+
+@pytest.mark.parametrize(
+    "dimension, center, expected", [(1, np.array([2.5]), "BoxWindow: [2.0, 3.0]"),],
+)
+def test_UnitBoxWindow_with_center_specified(dimension, center, expected):
+    unitBox = UnitBoxWindow(dimension, center)
+    assert unitBox.__repr__() == expected
+
+
+def test_UnitBoxWindow_volume():
+    unitBox = UnitBoxWindow(3)
+    assert unitBox.volume() == 1

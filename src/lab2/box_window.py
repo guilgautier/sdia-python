@@ -25,10 +25,7 @@ class BoxWindow:
             String: The representation of the box
         """
         s = "BoxWindow: "
-        if len(self.bounds) == 1:
-            s = s + "[" + str(self.bounds[0][0]) + ", " + str(self.bounds[0][1]) + "]"
-            return s
-        else:
+        if len(self.bounds) > 1:
             for k in range(0, len(self.bounds) - 1):
                 s = (
                     s
@@ -39,15 +36,15 @@ class BoxWindow:
                     + "]"
                     + " x "
                 )
-            s = (
-                s
-                + "["
-                + str(self.bounds[len(self.bounds) - 1][0])
-                + ", "
-                + str(self.bounds[len(self.bounds) - 1][1])
-                + "]"
-            )
-            return s
+        s = (
+            s
+            + "["
+            + str(self.bounds[len(self.bounds) - 1][0])
+            + ", "
+            + str(self.bounds[len(self.bounds) - 1][1])
+            + "]"
+        )
+        return s
 
     def __len__(self):
         """Returns the len of the box, ie the dimension.
@@ -128,11 +125,11 @@ class UnitBoxWindow(BoxWindow):
             dimension (int): The dimension of the box window
             center (numpy.array, optional): The array of the center of each segment of the box window. Defaults to None.
         """
-        bounds = np.zeros([dimension])
+        bounds = np.zeros(shape=(dimension, 2))
         if center == None:
             for k in range(0, dimension):
-                bounds[k] = np.array([-0.5, 0.5])
+                bounds[k] = [-0.5, 0.5]
         else:
             for k in range(0, dimension):
-                bounds[k] = np.array([center[k] - 0.5, center[k] + 0.5])
-        super(BoxWindow, self).__init__(bounds)
+                bounds[k] = [center[k] - 0.5, center[k] + 0.5]
+        super().__init__(bounds)
