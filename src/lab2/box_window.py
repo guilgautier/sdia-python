@@ -1,11 +1,14 @@
-from lab2.utils import get_random_number_generator
+from math import *  # ! never use wildcard imports, import the specific functions
+
 import numpy as np
-from math import *
+
+from lab2.utils import get_random_number_generator
 
 
+# todo test the class
+# todo write the docstrings
 class BoxWindow:
-    """[summary]
-    """
+    """[summary]"""
 
     def __init__(self, args):
         """[summary]
@@ -22,7 +25,8 @@ class BoxWindow:
             [type]: [description]
         """
         args = self.bounds
-        hamza = ""
+        hamza = ""  # ? why this variable name
+        # * consider for i, (a, b) in enumerate(self.bounds)
         for i in range(0, len(args)):
             hamza = hamza + str(args[i])
             if i < len(args) - 1:
@@ -35,31 +39,32 @@ class BoxWindow:
         return len(args)
 
     def __contains__(self, args):
-        Box_args = self.bounds
-        for i in range(0, len(arg)):
+        Box_args = self.bounds  # ! Box_args not defined
+        # * consider for (a, b), x in zip(self.bounds, point)
+        for i in range(0, len(arg)):  # ! arg not defined
             a = args[i][0]
             b = args[i][1]
-            c = box_args[i][0]
+            c = box_args[i][0]  # ! box_args not defined
             d = box_args[i][1]
             if a < c or d < b:
                 return False
         return True
 
+    # todo describe you implementation of the docstring
     def dimension(self):
-        """[summary]
-        """
-        n = len(self.bounds)
+        """[summary]"""
+        n = len(self.bounds)  # ? why not using self.dimension()
         return 2 * n
 
     def volume(self):
-        """[summary]
-        """
-        n = len(self.bounds)
-        args = self.bounds
-        V = 1
+        """[summary]"""
+        n = len(self.bounds)  # ? why not using self.dimension()
+        args = self.bounds  # ? why this variable name
+        V = 1  # ! V and v are different variables, your code may not work properly
+        # * exploit numpy vectors, use - or np.diff, and np.prod
         for i in range(0, n):
             l = args[i][1] - args[i][0]
-            v = v * l
+            v = v * l  # * use *= operator
         return v
 
     def indicator_function(self, args):
@@ -73,7 +78,7 @@ class BoxWindow:
         for i in range(0, n):
             a = Box_args[i][1]
             b = Box_args[i][0]
-            if args[i] < b or arg[i] > a:
+            if args[i] < b or arg[i] > a:  # ! arg not defined
                 return False
         return True
 
@@ -87,7 +92,9 @@ class BoxWindow:
         n = len(self.bounds)
         args = self.bounds
         L = []
+        # * exploit numpy, rng.uniform(a, b, size=n)
         for i in range(0, n):
+            # ! random is not defined, please use rng
             a = random.uniform(args[i][0], args[i][1])
             L.append(a)
         L = np.array(L)
@@ -99,6 +106,7 @@ class BoxWindow:
         Returns:
             [type]: [description]
         """
+        # * exploit numpy vectors, use - or np.diff, and +
         center = []
         n = len(self.bounds)
         for i in range(n):
@@ -108,6 +116,7 @@ class BoxWindow:
         return center
 
 
+# todo write the docstrings
 class UnitBoxWindow(BoxWindow):
     def __init__(self, center, dimension):
         """[summary]
@@ -116,13 +125,17 @@ class UnitBoxWindow(BoxWindow):
             dimension ([type]): [description]
             center ([type], optional): [description]. Defaults to None.
         """
-        L = []
-        for i in range(dimension):
+        # ? how do you treat the case where center's dimension does not match dimension
+        L = []  # ? why this variable name
+        # * exploit numpy vectorization power
+        for i in range(dimension):  # * consider for c in center
             L.append([center[i] - 0.5, center[i] + 0.5])
-        super().__init__(L)
+        super().__init__(L)  # * perfect use of super
 
 
 class BallWindow:
+    # todo test the class
+    # todo write the docstrings
     def __init__(self, center, radius):
         self.center = center
         self.radius = radius
@@ -132,18 +145,19 @@ class BallWindow:
 
     def __contains__(self, point):
         s = 0
-        for i in range(dimension):
+        # * consider for (a, b), x in zip(self.bounds, point)
+        for i in range(dimension):  # ! dimension variable not defined
             s += (point[i] - self.center[i]) ** 2
         if s <= (self.radius) ** 2:
             return True
         return False
 
-    def area(self):
-        n = len(self.center)
+    def area(self):  # ? naming: how about surface
+        n = len(self.center)  # ? why not using self.dimension()
         R = self.radius
         return 2 * (pi) ** (n / 2) * R ** (n - 1) / gamma(n / 2)
 
     def volume(self):
-        n = len(self.center)
+        n = len(self.center)  # ? why not using self.dimension()
         R = self.radius
         return (pi) ** (n / 2) * R ** (n) / gamma(n / 2 + 1)
