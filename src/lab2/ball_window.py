@@ -1,6 +1,8 @@
+from math import gamma  # * see also scipy.special
+
 import numpy as np
 import numpy.linalg as la
-from math import gamma
+
 from lab2.utils import get_random_number_generator
 
 
@@ -11,19 +13,26 @@ class BallWindow:
         """Initialize the BallWindows from the center and the radius
 
         Args:
-            center (list) : gives the coordinates of the center 
+            center (list) : gives the coordinates of the center
             radius (int) : gives the radius of the ball. Default to 1.
         """
         self.center = np.array(center)
-        self.radius = float(radius) 
+        self.radius = float(radius)  # why converting to float
 
     def __str__(self):
         """Display the BallWindow in a string
 
         Returns:
-            [string]: BallWindows center and radius 
+            [string]: BallWindows center and radius
         """
-        description = "BallWindow: center" + str(list(self.center)) + " & radius[" + str(self.radius) + "]."
+        # ! use f-strings
+        description = (
+            "BallWindow: center"
+            + str(list(self.center))
+            + " & radius["
+            + str(self.radius)
+            + "]."
+        )
         return description
 
     def __len__(self):
@@ -32,6 +41,7 @@ class BallWindow:
         Returns:
             [int]: size of the space containing the BallWindow
         """
+        # ? how about .size
         return self.center.shape[0]
 
     def __contains__(self, point):
@@ -44,7 +54,8 @@ class BallWindow:
         Returns:
             [boolean]: [True if the point is inside, else returns False]
         """
-        assert len(point) == len(self) ##Test if the point has the same dimension
+        # ? readability: len(self) => self.dimension()
+        assert len(point) == len(self)  ##Test if the point has the same dimension
         return la.norm(self.center - point) <= self.radius
 
     def dimension(self):
@@ -67,6 +78,7 @@ class BallWindow:
         Args:
             args ([int]): 1 if the argument is inside the BallWindow, else 0
         """
+        # * same remarks as in BoxWindow.indicator_function
         if len(array_points.shape) > 1:
             return np.array([int(p in self) for p in array_points])
         return int(array_points in self)
@@ -77,17 +89,19 @@ class BallWindow:
         Args:
             n (int, optional): Number of random points to generate. Defaults to 1.
             rng (type, optional): Defaults to None.
-        
+
         Returns: array which contains n points randomly uniformly generated
 
-        """ 
-        dim = len(self)           
+        """
+        dim = len(self)
         rng = get_random_number_generator(rng)
         r = self.radius
+        # ! readability: difficult to follow,
+        # ? are you sure the points are uniformly distributed
         res = rng.uniform(0, 1, (n, dim))
-        normalis = np.apply_along_axis(np.linalg.norm, axis= 0, arr=res)
-        res = res / normalis 
-        dist = rng.uniform(-r, r, (n, 1) )
-        res = res * dist 
-        return res + self.center  
-    
+        # * use np.linalg.norm(, axis=)
+        normalis = np.apply_along_axis(np.linalg.norm, axis=0, arr=res)
+        res = res / normalis
+        dist = rng.uniform(-r, r, (n, 1))
+        res = res * dist  # * use *= (and potentially +=) operator
+        return res + self.center
