@@ -67,7 +67,7 @@ class BoxWindow:
             args (float array): The window box [description]
 
         Returns:
-            [type]: [description]
+            bool: True if point in window box, else False.
         """
         return args in self
 
@@ -118,27 +118,73 @@ class UnitBoxWindow(BoxWindow):
 
 class BallWindow:
     def __init__(self, center, radius):
+        """Create new ball window.
+
+        Args:
+            center (float array): coordinates of the center of the ball window.
+            radius (float): radius of the ball window.
+        """
         self.center = center
         self.radius = radius
 
     def dist_to_center(self, x):
+        """Compute the distance of a given point to the center of the ball window.
+
+        Args:
+            x (float array): coordinates of the point of interest.
+
+        Returns:
+            float: distance of the given point to the center of the ball window.
+        """
         return np.sqrt(np.sum(np.power(x - self.center, 2)))
 
     def dist_to_ball(self, x):
+        """Compute the distance of a given point to the surface of the ball window.
+
+        Args:
+            x (float array): coordinates of the point of interest.
+
+        Returns:
+            float: distance of the given point to the surface of the ball window.
+        """
         return self.dist_to_center(x) - self.radius
 
     def __contains__(self, x):
+        """Compute whether a given point is contained in the ball window or not.
+
+        Args:
+            x (float array): coordinates of the point of interest.
+
+        Returns:
+            bool: point is in ball window or not.
+        """
 
         # we need to compute the distance of the point of interest to the center of the ball window
         return self.dist_to_center(x) < self.radius
 
     def __str__(self):
+        """BallWindow: (center, radius)
+
+        Returns:
+            str: string representation of the ball window.
+        """
         return f"BallWindow (center : {self.center}, radius : {self.radius})"
 
     def __len__(self):
+        """Indicates the number of dimension of the ball window.
+
+        Returns:
+            int: number of dimension of the ball window.
+        """
         return len(self.center)
 
     def volume(self):
+        """Computes the volume of the ball.
+
+        Returns:
+            float: volume of the ball window.
+        """
+
         return 4 * np.pi * np.power(self.radius, 3) / 3
 
 
