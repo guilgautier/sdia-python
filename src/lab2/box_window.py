@@ -195,7 +195,7 @@ def estimate_pi(n=int(1e5)):
     Args:
         n (int, optional): number of iterations for pi estimation. Defaults to int(1e5).
     Returns:
-        float list: list of all estimations of pi
+        float list: list of all estimations of pi (last should be the more accurate)
     """
     center = np.array([0, 0])
 
