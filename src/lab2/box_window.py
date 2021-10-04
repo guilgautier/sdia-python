@@ -1,5 +1,6 @@
 from lab2.utils import get_random_number_generator
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class BoxWindow:
@@ -102,7 +103,7 @@ class BoxWindow:
 
 class UnitBoxWindow(BoxWindow):
     def __init__(self, dimension, center):
-        """[summary]
+        """Unit box of a given dimension (hypercube box) at a given center point
 
         Args:
             dimension (float): [description]
@@ -113,3 +114,58 @@ class UnitBoxWindow(BoxWindow):
                            for c in center])
 
         super(UnitBoxWindow, self).__init__(bounds)
+
+
+class BallWindow:
+    def __init__(self, center, radius):
+        self.center = center
+        self.radius = radius
+
+    def dist_to_center(self, x):
+        return np.sqrt(np.sum(np.power(x - self.center, 2)))
+
+    def dist_to_ball(self, x):
+        return self.dist_to_center(x) - self.radius
+
+    def __contains__(self, x):
+
+        # we need to compute the distance of the point of interest to the center of the ball window
+        return self.dist_to_center(x) < self.radius
+
+    def __str__(self):
+        return f"BallWindow (center : {self.center}, radius : {self.radius})"
+
+    def __len__(self):
+        return len(self.center)
+
+    def volume(self):
+        return 4 * np.pi * np.power(self.radius, 3) / 3
+
+
+def estimate_pi(n=int(1e5)):
+    """Estimating pi using the rejection sampling method
+
+    Args:
+        n (int, optional): number of iterations for pi estimation. Defaults to int(1e5).
+    Returns:
+        float list: list of all estimations of pi
+    """
+    center = np.array([0, 0])
+
+    ball = BallWindow(center, 1)
+    unit_box = UnitBoxWindow(2, center)
+
+    c = 0
+    rslt = []
+    for i in range(n):
+        c += unit_box.get_random_point_inside() in ball
+        rslt += [4 * c / (i + 1)]
+    return rslt
+
+
+if __name__ == '__main__':
+    # Estimating pi using the rejection sampling method
+    plt.plot(estimate_pi(), label="estimated pi")
+    plt.title("Estimation of pi over iterations")
+    plt.legend()
+    plt.show()
