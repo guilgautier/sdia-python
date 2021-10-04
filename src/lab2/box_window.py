@@ -32,16 +32,18 @@ class BoxWindow:
         Le premier return permet d'avoir la première dimension."""
         return f"{self.bounds.shape[0]} x 2"
 
-    def contains(self, point):
+    def indicator_function(self, point):
         """Point in box ? """
         """ On pourrait vérifier que le point est à la bonne dimension, il doit être de la même taille que les bounds. On peut le faire avec un assert"""
 
         """ on peut itérer sur l'objet directement, pas de range(len(...))"""
-
-        for (a, b), x in zip(self.bounds, point):
-            if not (a <= x <= b):
+        a = True
+        for i in range(self.bounds.shape[0]):
+            if (self.bounds[i, 0] <= point[i]) and (point[i] <= self.bounds[i, 1]):
+                a == True
+            else:
                 return False
-        return True
+        return a
 
     def dimension(self):
         """"""
@@ -65,7 +67,7 @@ class BoxWindow:
         else:
             return f"Volume =  {self.lenght()[0] * self.lenght()[1] * self.lenght()[2]}"
 
-    def indicator_function(self, args):
+    def indicator_functionseveral(self, args):
         """ Fonction indicatrice d'un ensemble, on veut avoir en entrée plusieurs points et que la fonction nous renvoie une liste avec True, False, True etc , si le point est dans la box ou non.
 
         Args:
