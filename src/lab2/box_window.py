@@ -18,7 +18,7 @@ class BoxWindow:
         self.bounds = np.array(bounds)
 
     def __repr__(self):
-        """Return for example the following string :
+        """Returns for example the following string :
         "BoxWindow: [a_1, b_1] * [a_2, b_2]"
 
         Returns:
@@ -50,7 +50,7 @@ class BoxWindow:
             return s
 
     def __len__(self):
-        """Return the len of the box, ie the dimension.
+        """Returns the len of the box, ie the dimension.
 
         Returns:
             int: the dimension of the box
@@ -58,7 +58,7 @@ class BoxWindow:
         return len(self.bounds)
 
     def __contains__(self, point):
-        """Return True if the point beyonds to the box
+        """Returns True if the point beyonds to the box
 
         Args:
             point (numpy.array): the point
@@ -70,15 +70,18 @@ class BoxWindow:
         return all(a <= x <= b for (a, b), x in zip(self.bounds, point))
 
     def dimension(self):
-        """[summary]
+        """Returns the dimension of the box, ie the number of segment.
+
+        Returns:
+            int: the dimension of the box
         """
         return self.__len__()
 
     def volume(self):
-        """[summary]
+        """Returns the volume of the box, ie the multiplication of the size of each segment.
 
         Returns:
-            [type]: [description]
+            int: the volume of the box
         """
         V = 1
         for k in range(0, len(self.bounds)):
@@ -86,35 +89,50 @@ class BoxWindow:
         return V
 
     def indicator_function(self, point):
-        """[summary]
+        """Returns True if the point beyonds to the box
 
         Args:
-            args ([type]): [description]
+            point (numpy.array): the point
+
+        Returns:
+            boolean: True if the point beyonds to the box
         """
         return self.__contains__(point)
 
     def rand(self, n=1, rng=None):
-        """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
+        """Generate n points uniformly at random inside the BoxWindow.
 
         Args:
-            n (int, optional): [description]. Defaults to 1.
-            rng ([type], optional): [description]. Defaults to None.
+            n (int, optional): the number of points. Defaults to 1.
+            rng (numpy.random._generator.Generator, optional): Random number generator. Defaults to None.
+
+        Returns:
+            A list of n points generated uniformly at random inside the BoxWindow.
         """
         rng = get_random_number_generator(rng)
-        points = np.zeros((n, len(self.bounds)))
+        points = []
         for k in range(0, n):
+            pointk = np.zeros(len(self.bounds))
             for i in range(0, len(self.bounds)):
                 c = rng.uniform(self.bounds[i][0], self.bounds[i][1])
-                points[k][i] = c
+                pointk[i] = c
+            points.append(pointk)
         return points
 
 
 class UnitBoxWindow(BoxWindow):
-    def __init__(self, center, dimension):
-        """[summary]
+    def __init__(self, dimension, center=None):
+        """Returns a unit box window, with segments of length 1 for each dimension, centered on args if the center is precised, else, it is centered on (0,0,...,0).
 
         Args:
-            dimension ([type]): [description]
-            center ([type], optional): [description]. Defaults to None.
+            dimension (int): The dimension of the box window
+            center (numpy.array, optional): The array of the center of each segment of the box window. Defaults to None.
         """
-        super(BoxWindow, self).__init__(args)
+        bounds = np.zeros([dimension])
+        if center == None:
+            for k in range(0, dimension):
+                bounds[k] = np.array([-0.5, 0.5])
+        else:
+            for k in range(0, dimension):
+                bounds[k] = np.array([center[k] - 0.5, center[k] + 0.5])
+        super(BoxWindow, self).__init__(bounds)

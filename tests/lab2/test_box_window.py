@@ -4,6 +4,14 @@ import pytest
 from lab2.box_window import BoxWindow
 
 
+def test_raise_type_error_when_points_is_not_an_array():
+    with pytest.raises(AssertionError):
+        # call_something_that_raises_TypeError()
+        L = [[1, 2], [3, 4]]
+        box = BoxWindow(L)
+        raise AssertionError()
+
+
 @pytest.mark.parametrize(
     "bounds, expected",
     [
@@ -98,7 +106,7 @@ def test_volume_box(box, expected):
 
 def test_rand_onepoint_onedimension():
     box = BoxWindow(np.array([[1, 2]]))
-    assert box.__contains__(box.rand())
+    assert box.__contains__(box.rand()[0])
 
 
 def test_rand_multiplepoint_3dimension():
