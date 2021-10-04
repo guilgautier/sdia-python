@@ -112,6 +112,7 @@ class UnitBoxWindow(BoxWindow):
 
         bounds = np.array([[c - dimension / 2, c + dimension / 2]
                            for c in center])
+        print(bounds)
 
         super(UnitBoxWindow, self).__init__(bounds)
 
