@@ -17,7 +17,7 @@ def test_raise_type_error_when_something_is_called():
         (np.array([[0, 5], [0, 5]]), "BoxWindow: [0, 5] x [0, 5]"),
         (
             np.array([[0, 5], [-1.45, 3.14], [-10, 10]]),
-            "BoxWindow: [0, 5] x [-1.45, 3.14] x [-10, 10]",
+            "BoxWindow: [0.0, 5.0] x [-1.45, 3.14] x [-10.0, 10.0]",
         ),
     ],
 )
@@ -30,19 +30,21 @@ def box_2d_05():
     return BoxWindow(np.array([[0, 5], [0, 5]]))
 
 
-# @pytest.mark.parametrize(
-#     "point, expected",
-#     [
-#         (np.array([0, 0]), True),
-#         (np.array([2.5, 2.5]), True),
-#         (np.array([-1, 5]), False),
-#         (np.array([10, 3]), False),
-#     ],
-# )
-def test_indicator_function_box_2d():
+@pytest.mark.parametrize(
+    "point, expected",
+    [
+        (np.array([0, 0]), True),
+        (np.array([2.5, 2.5]), True),
+        (np.array([-1, 5]), False),
+        (np.array([10, 3]), False),
+    ],
+)
+def test_indicator_function_box_2d(point, expected):
     box_2d_05 = BoxWindow(np.array([[0, 5], [0, 5]]))
-    is_in = box_2d_05.indicator_function((0, 1))
-    assert is_in
+    # is_in = box_2d_05.indicator_function((0, 1))
+    # is_in = box_2d_05.__contains__(point)
+    is_in = point in box_2d_05
+    assert is_in == expected
 
 
 # ================================

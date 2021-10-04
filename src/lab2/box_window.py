@@ -1,4 +1,4 @@
-from lab2.utils import get_random_number_generator
+# from lab2.utils import get_random_number_generator
 import numpy as np
 
 
@@ -11,19 +11,27 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
-        # if (type(args) == np.ndarray) and (args.shape[1] == 2):
-        #    self.bounds = args
-        # else:
-        # self.bounds = np.ndarray([[]])
         self.bounds = np.array(bounds)
 
     def __str__(self):
-        r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
+        """BoxWindow: `[a_1, b_1] x [a_2, b_2] `
 
         Returns:
             [type]: [description]
         """
-        return ""
+        bounds_list = []
+        if len(self.bounds.shape) == 1:
+            return "BoxWindow: " + str(self.bounds.tolist())
+
+        A_list = self.bounds.tolist()
+        to_print = ""
+        for i in range(len(A_list)):
+            if i != len(A_list) - 1:
+                to_print = to_print + str(A_list[i]) + " x "
+            else:
+                to_print = to_print + str(A_list[i])
+
+        return "BoxWindow: " + to_print
 
     def __len__(self):
         S = 0
@@ -32,16 +40,11 @@ class BoxWindow:
         return S
 
     def __contains__(self, point):
-        return all(a <= x <= b for (a, b), x in zip(self.bounds, point))
 
-        # point = (1.5, 6)
-        # assert len(self) == len(point)
-        # verite = True
-        # for dim in self.bounds.shape[0]:
-        #    liminf = self.bounds[dim][0]
-        #    limsup = self.bounds[dim][1]
-        #    verite = verite and (point[dim] < limsup) and (point[dim] > liminf)
-        # return verite
+        for i in range(len(point)):
+            if not (self.bounds[i][0] <= point[i] <= self.bounds[i][1]):
+                return False
+        return False
 
     def dimension(self):
         """[On donne la dimension mathématique de la boite]"""
@@ -60,7 +63,8 @@ class BoxWindow:
         Args:
             args ([type]): [description]
         """
-        return point in self
+        verite = self.__contains__(point)
+        return verite
 
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
@@ -86,8 +90,9 @@ class UnitBoxWindow(BoxWindow):
 
 # a = BoxWindow([[1, 2], [5, 8]])
 # print((0.5, 6) in a)
-def box_2d_05():
-    return BoxWindow(np.array([[0, 5], [0, 5]]))
+# def box_2d_05():
+# return BoxWindow(np.array([[0, 5], [0, 5]]))
 
 
-print(box_2d_05().indicator_function((0, 1)))
+# print(box_2d_05().indicator_function((0, 4)) == True)
+# print(box_2d_05().__contains__((np.array([2.5, 2.5]))))
