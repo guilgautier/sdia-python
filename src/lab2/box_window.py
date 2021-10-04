@@ -91,7 +91,7 @@ class BoxWindow:
 
         Returns:
 
-            [list] : list of booleans, with True if the point is contained in the BoxWindow, False if not.
+            [list] : [list of booleans, with True if the point is contained in the BoxWindow, False if not]
         """
         a = []
         for i in range(len(args)):
@@ -107,13 +107,19 @@ class BoxWindow:
             rng ([type], optional): [description]. Defaults to None.
         """
         rng = get_random_number_generator(rng)
-        return
+        points = []
+        for i in range(n):
+            point = []
+            for (a, b) in self.bounds:
+                point.append(rng.uniform(a, b))
+            points.append(point)
+        return points
 
     def center(self):
-        """[summary]
+        """Returns the center of the BoxWindow
 
         Returns:
-            [type]: [description]
+            [list]: [coordonnates of the center]
         """
 
         center = []
