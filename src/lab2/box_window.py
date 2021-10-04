@@ -1,15 +1,15 @@
-# from lab2.utils import get_random_number_generator
+from lab2.utils import get_random_number_generator
 import numpy as np
 
 
 class BoxWindow:
-    """[summary]"""
+    """[Simple class describing a box]"""
 
     def __init__(self, bounds):
-        """[summary]
+        """[initialization method]
 
         Args:
-            args ([type]): [description]
+            args ([type]): [giving bounds as a list of segments defining bounds in each dimension]
         """
         self.bounds = np.array(bounds)
 
@@ -34,6 +34,11 @@ class BoxWindow:
         return "BoxWindow: " + to_print
 
     def __len__(self):
+        """[Returns the sum of the lengths of the different bounds]
+
+        Returns:
+            [type]: [description]
+        """
         S = 0
         for segment in self.bounds:
             S += segment[1] - segment[0]
@@ -47,7 +52,7 @@ class BoxWindow:
         return True
 
     def dimension(self):
-        """[On donne la dimension mathématique de la boite]"""
+        """[Returns the mathematical dimension of the box]"""
         return self.bounds.shape[0]
 
     def volume(self):
@@ -58,23 +63,35 @@ class BoxWindow:
         return produit
 
     def indicator_function(self, point):
-        """[summary]
+        """[returns True if the box contains the point]
 
         Args:
-            args ([type]): [description]
+            args ([type]): [the point must have the same dimension as the box]
         """
         verite = self.__contains__(point)
         return verite
 
-    def rand(self, n=1, rng=None):
+    def rand(self, rng=None):
+        """Generate a point uniformly at random inside the :py:class:`BoxWindow`.
+
+        Args:
+            rng ([type], optional): [description]. Defaults to None.
+        """
+        rng = get_random_number_generator(rng)
+        number_list = []
+        for bound in self.bounds:
+            number_list.append(rng.uniform(bound[0], bound[1]))
+        return np.array(number_list)
+
+    def rand_n(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
 
         Args:
             n (int, optional): [description]. Defaults to 1.
             rng ([type], optional): [description]. Defaults to None.
         """
-        rng = get_random_number_generator(rng)
-        return
+        points_list = [self.rand(rng) for i in range(n)]
+        return points_list
 
 
 class UnitBoxWindow(BoxWindow):
