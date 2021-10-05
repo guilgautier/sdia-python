@@ -27,16 +27,16 @@ def test_box_string_representation(bounds, expected):
 
 @pytest.fixture
 def example_box_window():
-    bounds = [[-5, -5], [5, 5]]
+    bounds = [[-5, 5], [-5, 5]]
     return BoxWindow(bounds)
 
 
 @pytest.mark.parametrize(
-    "point, expected", [([0, 0], True), ([-1, 5], True), ([5, 6], False),],
+    "points, expected", [([[0, 0]], [True]), ([[-1, 5],[1, 2]], [True,True]), ( [[5, 6],[1, 2],[5,6]], [False,True,False]),],
 )
-def test_contains(example_box_window, point, expected):
+def test_indicator_function(example_box_window, points, expected):
     box = example_box_window
-    assert box.__contains__(point) == expected
+    assert (box.indicator_function(points)) == expected
 
 
 @pytest.mark.parametrize(
