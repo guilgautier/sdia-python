@@ -11,6 +11,8 @@ def is_unique(x):
 
 def triangle_shape(height):
     triangle = str()
+    # ! use f-strings
+    # * the * operator also works on strings
     for i in range(height):
         for j in range(height - i - 1):
             triangle += " "
@@ -19,7 +21,7 @@ def triangle_shape(height):
         for j in range(height - i - 1):
             triangle += " "
         if i != height - 1:
-            triangle += "\n"
+            triangle += "\n"  # ! use "\n".join()
     return triangle
 
 

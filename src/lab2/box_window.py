@@ -1,6 +1,6 @@
-from lab2.utils import get_random_number_generator
-
 import numpy as np
+
+from lab2.utils import get_random_number_generator
 
 
 class BoxWindow:
@@ -25,30 +25,34 @@ class BoxWindow:
         dim = self.dimension()
         i = 0
 
+        # ! list is a built in function, use a different name
         for list in self.bounds:
 
+            # * unpacking a, b = list can be another option
             a = list[0]
             b = list[1]
             if a.dtype == "float64" and a.is_integer():
                 a = int(a)
             if b.dtype == "float64" and b.is_integer():
                 b = int(b)
-
+            # ! use f-strings
             if i == dim - 1:
                 string += "[" + str(a) + ", " + str(b) + "]"
-
             else:
                 string += "[" + str(a) + ", " + str(b) + "]" + " x "
             i += 1
 
         return string
 
+    # todo test it
     def __len__(self):
         """returns the max length of the box sides'
 
         Returns:
             [numerical type]: max length of the box sides'
         """
+        # * exploit numpy vectors, use np.diff, np.max
+        # * brackets [a, b] are not necessary here
         return np.max(np.array([b - a for [a, b] in self.bounds]))
 
     def __contains__(self, point):
@@ -60,8 +64,12 @@ class BoxWindow:
         Returns:
             [boolean]: True if the point is in the box, False otherwise
         """
+        # * nice check
         assert len(point) == self.dimension()
+
+        # * consider for (a, b), x in zip(self.bounds, point)
         bounds = self.bounds
+        # * consider initializing dim before assert and use it there
         dim = self.dimension()
         for i in range(dim):
             if not bounds[i][0] <= point[i] <= bounds[i][1]:
@@ -83,7 +91,8 @@ class BoxWindow:
         Returns:
             [numerical type]: volume of the box
         """
-        V = 1
+        # * exploit numpy vectors, use - or np.diff, and np.prod
+        V = 1  # ! naming: V -> volume ?
         for [a, b] in self.bounds:
             V *= b - a
         return V
@@ -97,8 +106,10 @@ class BoxWindow:
         Returns:
             [boolean]: value of the indicator function
         """
+        # ? how would you handle multiple points
         return point in self
 
+    # todo test it
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
 
@@ -111,6 +122,8 @@ class BoxWindow:
         """
 
         rng = get_random_number_generator(rng)
+        # * convention: use _ for unused counters
+        # * exploit numpy, rng.uniform(a, b, size=n)
         pointArray = np.array(
             [[rng.random() * (b - a) + a for [a, b] in self.bounds] for i in range(n)]
         )
@@ -122,6 +135,8 @@ class BoxWindow:
         Returns:
             [numpy list]: center point
         """
+        # * exploit numpy vectorization power
+        # ? how about np.mean
         return np.array([(a + b) / 2 for [a, b] in self.bounds])
 
 
@@ -132,6 +147,8 @@ class UnitBoxWindow(BoxWindow):
         Args:
             center (numpy list): list of the coordinates of the central point of the box
         """
+        # * exploit numpy vectorization power
+        # ? how about np.add.outer
         bounds = np.array([[c - 0.5, c + 0.5] for c in center])
         super(UnitBoxWindow, self).__init__(bounds)
 
@@ -150,6 +167,8 @@ class BallWindow:
         self.center = center
         self.radius = radius
 
+    # todo docstring
+    # todo test it
     def __str__(self):
         r"""
 
@@ -158,10 +177,12 @@ class BallWindow:
         """
         string = "BallWindow: "
         dim = self.dimension
+        # ! use f-strings
         string += "center: " + str(self.center) + "radius: " + str(self.radius)
 
         return string
 
+    # todo test it
     def __len__(self):
         """returns the diamter of the ball
 
@@ -179,10 +200,11 @@ class BallWindow:
         Returns:
             [boolean]: True if the point is in the ball, False otherwise
         """
-
         assert len(point) == self.dimension()
         dim = self.dimension()
-        d = 0
+        # * exploit numpy vectorization power
+        # ? how about np.linalg.norm
+        d = 0  # ! naming: d -> distance ?
         for i in range(dim):
             d += (self.center[i] - point[i]) ** 2
 
@@ -204,6 +226,7 @@ class BallWindow:
         """
         n = self.dimension()
         R = self.radius
+        # * consider divmod to avoid multiple n//2
         if n % 2 == 0:
             V = np.pi ** (n // 2) * R ** n / np.math.factorial(n // 2)
         else:
@@ -225,5 +248,5 @@ class BallWindow:
         Returns:
             [boolean]: value of the indicator function
         """
-
+        # ? how would you handle multiple points
         return point in self
