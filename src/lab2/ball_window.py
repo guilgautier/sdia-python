@@ -1,6 +1,7 @@
 import numpy as np
 
 
+# todo implement, document and test the class
 class BallWindow:
     def __init__(self, center, radius):
 
