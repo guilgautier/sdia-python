@@ -20,13 +20,19 @@ def test_radius(center, radius, expected):
 
 @pytest.mark.parametrize(
     "box, expected",
-    [(np.array([1]), 1), (np.array([1, 2.2]), 2), (np.array([1.4, 2.6, 3.9]), 3),],
+    [
+        (np.array([1]), 1),
+        (np.array([1, 2.2]), 2),
+        (np.array([1.4, 2.6, 3.9]), 3),
+    ],
 )
 def test_dimension_box(box, expected):
     ball = BallWindow(box, 4)
     assert ball.dimension() == expected
 
 
+# ? ball or center
+# ! tests pass but on a wrong implementation
 @pytest.mark.parametrize(
     "ball, radius, expected",
     [
@@ -84,12 +90,11 @@ def test_indicator_function_twoDimension():
     assert ball2.indicator_function(np.array([3.25, 2.75]))
 
 
+# ? does this raise a TypeError or an AssertionError
 def test_raise_type_error_when_points_is_not_of_good_dimension():
     with pytest.raises(AssertionError):
-        # call_something_that_raises_TypeError()
         ball1 = BallWindow(np.array([0, 0]), 1)
-        ball1.__contains__(np.array([1, 2, 3]))
-        raise AssertionError()
+        np.array([1, 2, 3]) in ball1
 
 
 # def test_rand_onepoint_onedimension():

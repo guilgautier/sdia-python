@@ -1,10 +1,10 @@
 import numpy as np
+
 from lab2.utils import get_random_number_generator
 
 
 class BallWindow:
-    """This class represents a ball according to the norm 1 of any dimension
-    """
+    """This class represents a ball according to the norm 1 of any dimension"""
 
     def __init__(self, center, radius):
         """Constructor of the class : build a ball whose dimension is given by the size of the center array and the radius by the float radius.
@@ -16,6 +16,9 @@ class BallWindow:
         self.center = center
         self.radius = radius
 
+    # ? what is this method used for
+    # ! __radius__ is not a conventional magic method
+    # ! radius is already an attribute -> self.radius
     def __radius__(self):
         """Returns the radius of the ball.
 
@@ -34,6 +37,8 @@ class BallWindow:
             boolean: True if the ball contains the point given in argument
         """
         assert len(point) == len(self.center)
+        # * exploit numpy vectorization power
+        # ? how about np.linalg.norm
         for k in range(0, len(point)):
             if not (
                 self.center[k] - self.radius <= point[k] <= self.center[k] + self.radius
@@ -55,6 +60,9 @@ class BallWindow:
         Returns:
             float: Returns the volume of the box
         """
+        # todo rewrite the method
+        # ! the volume (area) of a disk = pi r^2
+        # ? is this tested
         return (2 * self.radius) ** self.dimension()
 
     def indicator_function(self, point):
@@ -66,6 +74,7 @@ class BallWindow:
         Returns:
             boolean: True if the ball contains the point given in argument
         """
+        # ? how would you handle multiple points
         return self.__contains__(point)
 
     def rand(self, numberOfPoints=1, rng=None):
@@ -80,12 +89,18 @@ class BallWindow:
         """
         rng = get_random_number_generator(rng)
         points = []
+        # ! naming: snake case for variables number_of_points
+        # ! readability
+        # * exploit numpy, rng.uniform(a, b, size=n)
         for k in range(0, numberOfPoints):
             pointk = np.zeros([self.dimension()])
+            # * iterate over self.center
             for i in range(0, self.dimension()):
                 c = rng.uniform(
-                    self.center[i] - self.radius, self.center[i] + self.radius,
+                    self.center[i] - self.radius,
+                    self.center[i] + self.radius,
                 )
                 pointk[i] = c
             points.append(pointk)
         return points
+        # ? are you sure points are uniformly distributed

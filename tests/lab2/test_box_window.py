@@ -1,8 +1,7 @@
 import numpy as np
 import pytest
 
-from lab2.box_window import BoxWindow
-from lab2.box_window import UnitBoxWindow
+from lab2.box_window import BoxWindow, UnitBoxWindow
 
 
 def test_raise_type_error_when_points_is_not_an_array():
@@ -24,8 +23,8 @@ def test_raise_type_error_when_points_is_not_an_array():
         ),
     ],
 )
-def test_box_string_representation(bounds, expected):
-    assert repr(BoxWindow(bounds)) == expected
+def test_box_string_resentation(bounds, expected):
+    assert str(BoxWindow(bounds)) == expected
 
 
 @pytest.fixture
@@ -122,20 +121,26 @@ def test_rand_multiplepoint_3dimension():
     [
         (1, "BoxWindow: [-0.5, 0.5]"),
         (2, "BoxWindow: [-0.5, 0.5] x [-0.5, 0.5]"),
-        (3, "BoxWindow: [-0.5, 0.5] x [-0.5, 0.5] x [-0.5, 0.5]",),
+        (
+            3,
+            "BoxWindow: [-0.5, 0.5] x [-0.5, 0.5] x [-0.5, 0.5]",
+        ),
     ],
 )
 def test_UnitBoxWindow(dimension, expected):
     unitBox = UnitBoxWindow(dimension)
-    assert unitBox.__repr__() == expected
+    assert unitBox.__str__() == expected
 
 
 @pytest.mark.parametrize(
-    "dimension, center, expected", [(1, np.array([2.5]), "BoxWindow: [2.0, 3.0]"),],
+    "dimension, center, expected",
+    [
+        (1, np.array([2.5]), "BoxWindow: [2.0, 3.0]"),
+    ],
 )
 def test_UnitBoxWindow_with_center_specified(dimension, center, expected):
     unitBox = UnitBoxWindow(dimension, center)
-    assert unitBox.__repr__() == expected
+    assert unitBox.__str__() == expected
 
 
 def test_UnitBoxWindow_volume():
