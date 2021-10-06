@@ -110,12 +110,6 @@ def test_contains(box_2d_05, point, expected):
     assert is_in == expected
 
 
-# def test_contains2():
-#     with box_2d_05.assertRaises(Exception) as context:
-#         box_2d_05.__contains__(np.array([1, 2, 3]))
-#     box_2d_05.assertTrue("incorrect size of the point" in context.exception)
-
-
 # checks if the dimension of the box window is correct
 @pytest.mark.parametrize(
     "bounds, expected",
