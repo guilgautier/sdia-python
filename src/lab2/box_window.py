@@ -7,12 +7,15 @@ class BoxWindow:
     """Creates a window of rectangular shape"""
 
     def __init__(self, args):
-        """initialize the box window with the bounding points
+        """Initialize the box window with the bounding points.
 
         Args:
-            args (np.array([integer])): array of the bounding points of the box
+            args (array): array of the bounding points of the box, must be of dimension (d,2). Each segment of the form [a,b] with a<=b.
         """
-        self.bounds = args
+        if np.all(np.diff(args) >= 0):  # checks if a<=b for each segment
+            self.bounds = args
+        else:
+            raise Exception("incorrect bounds")
 
     def __str__(self):
         r"""BoxWindow: :math:`[a_1, b_1] \times [a_2, b_2] \times \cdots`
@@ -22,65 +25,67 @@ class BoxWindow:
         """
 
         def remove_zero(w):
-            if int(w)==w:
-                return int(w)
-            else:
-                return(w)
+            return int(w) if (int(w) == w) else w
 
         mot = ""
         for (a, b) in self.bounds:
             mot = mot + str([remove_zero(a), remove_zero(b)]) + " x "
-        return "BoxWindow: " + mot[:-3]
+        return "BoxWindow: " + mot[:-3]  # mot[:-3] to remove the last " x "
+
+    def length(self):
+        """Returns an array of the length of each segment (one for each direction)
+
+        Returns:
+            array : array of the length in each direction
+        """
+        a, b = self.bounds[:, 0], self.bounds[:, 1]
+        return b - a
 
     def __len__(self):
-        """
+        """Returns the len of the box window
+
         Returns:
-            list : list of the length in each direction
+            float : sum of the length of each segment (direction)
         """
-        L = []
-        for (a, b) in self.bounds:
-            L.append(b - a)
-        return L
+        length = self.length()
+        return sum(length)
 
     def __contains__(self, point):
         """Indicates if the point is contained in the box window.
         Returns True if the point is in the box, returns False otherwise.
 
         Args:
-            point ([np.array([Integer])): coordonnées d'un point
+            point (array): coordinates of the point that we want to know if it is part of the box.
         """
-        for (a, b), x in zip(self.bounds, point):
-            if not (a <= x <= b):
-                return False
-        return True
+        if point.shape == (self.dimension(),):
+            a, b = self.bounds[:, 0], self.bounds[:, 1]
+            return np.all(a <= point) and np.all(point <= b)
+        else:
+            raise Exception("incorrect size of the point")
 
     def dimension(self):
-        """
+        """Returns the dimension of the box window
+
         Returns:
             integer : dimension of the box
         """
         return len(self.bounds)
 
     def volume(self):
-        """
+        """Returns the volume created by the box window
+
         Returns:
             integer : volume of the box
         """
-        vol = 1
-        for p in self.__len__():
-            vol = vol * p
-        return vol
+        return np.prod(self.length())
 
-    def indicator_function(self, args):
+    def indicator_function(self, point):
         """Indicator function of the box window. Returns 1 if the point is in the box, returns 0 otherwise.
 
         Args:
-            args ([np.array([Integer])): coordonnées d'un point
+            point (array): coordinates of the point
         """
-        if self.__contains__(args) == True:
-            return 1
-        else:
-            return 0
+        return int(self.__contains__(point))
 
     def rand(self, n=1, rng=None):
         """Generate ``n`` points uniformly at random inside the :py:class:`BoxWindow`.
@@ -92,32 +97,29 @@ class BoxWindow:
         rng = get_random_number_generator(rng)
 
         L = []
-        for p in range(n):
-            L_petit = []
-            for (a, b) in self.bounds:
-                if a == b:
-                    L_petit.append(a)
-                else:
-                    L_petit.append(np.random.uniform(b - a) + a)
-            L.append(L_petit)
+        for p in range(n):  # nb of points taken randomly in the box
+            L.append([np.random.uniform(a, b) for (a, b) in self.bounds])
         return np.array(L)
 
 
 # heritage
 class UnitBoxWindow(BoxWindow):
     def __init__(self, center, dimension):
-        """[summary]
+        """Initialize unitary box window given an array for the center point(s) and dimension
 
         Args:
             dimension ([integer]): dimension of the box window
-            center (np.array()): Array de taille de la dimension. Chaque élément correspond au centre d'un segment de la boite. Defaults to None.
+            center (np.array()): Each element of the array is the center of one segment of the box. The array is of the shape (dimension,). Defaults to None.
         """
-        self.center =center
-        self.dimension=dimension
+        if (dimension,) != center.shape:
+            raise Exception("incorrect dimension or incorrect center")
+        else:
+            self.center = center
+            self.dimension = dimension
 
-        bounds=[]
-        for k in range(dimension):
-            bounds.append([center[k]-0.5,center[k]+0.5])
-        bounds=np.array(bounds)
+            bounds = []
+            for k in center:
+                bounds.append([k - 0.5, k + 0.5])
+            bounds = np.array(bounds)
 
-        super(UnitBoxWindow, self).__init__(bounds)
+            super(UnitBoxWindow, self).__init__(bounds)
