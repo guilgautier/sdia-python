@@ -1,4 +1,7 @@
+#
+# todo same remarks as in box_window
 class BallWindow:
+    # ! naming: radIUs
     def __init__(self, center, raduis):
         """initialization
 
@@ -10,7 +13,7 @@ class BallWindow:
         self.raduis = raduis
 
     def __str__(self):
-        """ print the ball
+        """print the ball
 
         Returns:
             str: BallWindow: center=..., raduis=...

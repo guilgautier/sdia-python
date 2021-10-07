@@ -7,7 +7,7 @@ from lab2.box_window import BoxWindow
 def test_raise_type_error_when_something_is_called():
     with pytest.raises(TypeError):
         # call_something_that_raises_TypeError()
-        pass
+        raise TypeError()
 
 
 @pytest.mark.parametrize(
@@ -32,7 +32,12 @@ def example_box_window():
 
 
 @pytest.mark.parametrize(
-    "points, expected", [([[0, 0]], [True]), ([[-1, 5],[1, 2]], [True,True]), ( [[5, 6],[1, 2],[5,6]], [False,True,False]),],
+    "points, expected",
+    [
+        ([[0, 0]], [True]),
+        ([[-1, 5], [1, 2]], [True, True]),
+        ([[5, 6], [1, 2], [5, 6]], [False, True, False]),
+    ],
 )
 def test_indicator_function(example_box_window, points, expected):
     box = example_box_window

@@ -1,6 +1,8 @@
 from lab2.utils import get_random_number_generator
 
 
+# todo make a pass on the docstrings
+# todo test all your methods
 class BoxWindow:
     """[summary]"""
 
@@ -18,7 +20,9 @@ class BoxWindow:
         Returns:
             str: return BoxWindow: intervals
         """
-        dd = "BoxWindow: "
+        # ! use f-strings
+        # * iterate over self.bounds
+        dd = "BoxWindow: "  # ! naming: dd ?
         for i in range(len(self.bounds)):
             dd += "[" + str(self.bounds[i][0]) + ", " + str(self.bounds[i][1]) + "]"
             if i < len(self.bounds) - 1:
@@ -42,6 +46,8 @@ class BoxWindow:
         Returns:
             bool: returns true if point contains in the box
         """
+        # * exploit numpy vectorization power
+        # * consider for (a, b), x in zip(self.bounds, point)
         for i in range(len(self.bounds)):
             if point[i] < self.bounds[i][0] or point[i] > self.bounds[i][1]:
                 return False
@@ -61,23 +67,27 @@ class BoxWindow:
         Returns:
             float: the volume of the box
         """
+        # * exploit numpy vectorization power
         p = 1
         for i in range(len(self.bounds)):
             p *= self.bounds[i][1] - self.bounds[i][0]
         return p
 
     def indicator_function(self, points):
-        """ list of true if the each point in points in the Box
+        """list of true if the each point in points in the Box
 
         Args:
             args (list): list of bool
         """
+        # * exploit numpy vectorization power
+        # ? how would you handle multiple points
         l = []
         for x in points:
             l.append(x in self)
         return l
 
-    def BoxBox(self, box):
+    # * consider merging this function into __contains__ and add if isinstance(xxx, BoxWindow)...
+    def BoxBox(self, box):  # ! naming: snake_case
         """verify if box in box (same dimension)
 
         Args:
@@ -101,6 +111,9 @@ class BoxWindow:
         """
         points = []
         rng = get_random_number_generator(rng)
+        # * convention: use _ for unused counters
+        # * exploit numpy, rng.uniform(a, b, size=)
+        # ! iterate over self.bounds
         for i in range(n):
             point = []
             for j in range(len(self.bounds)):
@@ -114,11 +127,13 @@ class BoxWindow:
         return points
 
     def center(self):
-        """ return a the center of the box as list
+        """return a the center of the box as list
 
         Returns:
             [list]: [center of box]
         """
+        # * exploit numpy vectorization power
+        # ? how about np.mean
         centre = []
         for x in self.bounds:
             centre.append((x[1] + x[0]) / 2)
@@ -127,11 +142,13 @@ class BoxWindow:
 
 class UnitBoxWindow(BoxWindow):
     def __init__(self, center, dimension):
-        """ initialization
+        """initialization
 
         Args:
             dimension (int): dimension of the box
             center (list, optional): the center of the box. Defaults to None.
         """
+        # * exploit numpy vectorization power
+        # ? how about np.add.outer
         bounds = [[center[i] - 0.5, center[i] + 0.5] for i in range(dimension)]
         super().__init__(bounds)
