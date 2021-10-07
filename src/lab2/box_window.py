@@ -3,6 +3,7 @@ import numpy as np
 from lab2.utils import get_random_number_generator
 
 
+# todo test your exceptions
 class BoxWindow:
     """Creates a window of rectangular shape"""
 
@@ -15,6 +16,7 @@ class BoxWindow:
         if np.all(np.diff(args) >= 0):  # checks if a<=b for each segment
             self.bounds = args
         else:
+            # ! raise a more concrete exception https://docs.python.org/3/library/exceptions.html#concrete-exceptions
             raise Exception("incorrect bounds")
 
     def __str__(self):
@@ -25,10 +27,12 @@ class BoxWindow:
         """
 
         def remove_zero(w):
-            return int(w) if (int(w) == w) else w
+            int_w = int(w)
+            return int_w if int_w == w else w
 
         mot = ""
-        for (a, b) in self.bounds:
+        # ! use f-strings
+        for a, b in self.bounds:
             mot = mot + str([remove_zero(a), remove_zero(b)]) + " x "
         return "BoxWindow: " + mot[:-3]  # mot[:-3] to remove the last " x "
 
@@ -39,6 +43,7 @@ class BoxWindow:
             array : array of the length in each direction
         """
         a, b = self.bounds[:, 0], self.bounds[:, 1]
+        # ? how about np.diff
         return b - a
 
     def __len__(self):
@@ -57,10 +62,12 @@ class BoxWindow:
         Args:
             point (array): coordinates of the point that we want to know if it is part of the box.
         """
+        # ? use .ndim and .size
         if point.shape == (self.dimension(),):
             a, b = self.bounds[:, 0], self.bounds[:, 1]
             return np.all(a <= point) and np.all(point <= b)
         else:
+            # ! raise a more concrete exception https://docs.python.org/3/library/exceptions.html#concrete-exceptions
             raise Exception("incorrect size of the point")
 
     def dimension(self):
@@ -85,6 +92,8 @@ class BoxWindow:
         Args:
             point (array): coordinates of the point
         """
+        # ? how would you handle multiple points
+        # ! use "point in self"
         return int(self.__contains__(point))
 
     def rand(self, n=1, rng=None):
@@ -97,7 +106,10 @@ class BoxWindow:
         rng = get_random_number_generator(rng)
 
         L = []
+        # * convention: use _ for unused counters
+        # * exploit numpy, rng.uniform(a, b, size=)
         for p in range(n):  # nb of points taken randomly in the box
+            # ! use rng
             L.append([np.random.uniform(a, b) for (a, b) in self.bounds])
         return np.array(L)
 

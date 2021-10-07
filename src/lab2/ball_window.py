@@ -6,6 +6,7 @@ from lab2.utils import get_random_number_generator
 class BallWindow:
     """Creates a window of circular shape"""
 
+    # ? circular shape => ball shape
     def __init__(self, center, radius):
         """Initialize the ball window with the center point and the radius .
 
@@ -22,7 +23,8 @@ class BallWindow:
         Returns:
             integer : dimension of the ball window
         """
-        return (self.center).shape[0]
+        # ? how about .size
+        return self.center.shape[0]
 
     def volume(self):
         """Returns the volume created by the ball window
@@ -30,14 +32,14 @@ class BallWindow:
         Returns:
             integer : volume of the ball
         """
+        # ! duplicate code, define a temporary variable = self.dimension()
         if self.dimension() == 1:
             return 2 * self.radius
-        elif self.dimension() == 2:
+        if self.dimension() == 2:
             return np.pi * self.radius ** 2
-        elif self.dimension() == 3:
+        if self.dimension() == 3:
             return (4 / 3) * np.pi * self.radius ** 3
-        else:
-            raise Exception("dimension too high")
+        raise Exception("dimension too high")
 
     def __contains__(self, point):
         """Indicates if the point is contained in the ball window.
@@ -46,11 +48,12 @@ class BallWindow:
         Args:
             point (array): coordinates of the point that we want to know if it is part of the ball.
         """
-        if point.shape == self.center.shape:
-            N = np.linalg.norm(point - self.center)
-            return np.all(N <= self.radius)
-        else:
+        # * isolate exception from body of the method
+        if point.shape != self.center.shape:
             raise Exception("incorrect size of the point")
+
+        N = np.linalg.norm(point - self.center)
+        return np.all(N <= self.radius)
 
     def indicator_function(self, point):
         """Indicator function of the ball window. Returns 1 if the point is in the ball, returns 0 otherwise.
@@ -58,6 +61,7 @@ class BallWindow:
         Args:
             point (array): coordinates of the point
         """
+        # todo same comments as in BoxWindow.indicator_function
         return int(self.__contains__(point))
 
     def rand(self, n=1, rng=None):
@@ -69,6 +73,7 @@ class BallWindow:
         """
         rng = get_random_number_generator(rng)
 
+        # todo same comments as in BoxWindow.indicator_function
         L = []
         for p in range(n):  # nb of points taken randomly in the box
             L.append(
