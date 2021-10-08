@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from lab2.box_window import BoxWindow
+from sdia_python.lab2.box_window import BoxWindow
 
 
 def test_raise_type_error_when_something_is_called():

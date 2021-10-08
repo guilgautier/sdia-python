@@ -6,7 +6,7 @@ Practice your numpy skills in [notebooks/lab3.ipynb](../../notebooks/lab3.ipynb)
 
 ## Back to lab2
 
-- Use numpy vectorization power to refactor your code from lab2
+- Use numpy vectorization power to refactor your code from sdia_python.lab2
 - Make sure each method is
   - tested
   - well documented (docstrings + additional comments if needed)

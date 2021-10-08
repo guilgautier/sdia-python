@@ -2,7 +2,7 @@
 Lab 1
 *****
 
-.. automodule:: lab1.functions
+.. automodule:: sdia_python.lab1.functions
     :members:
     :inherited-members:
     :show-inheritance:

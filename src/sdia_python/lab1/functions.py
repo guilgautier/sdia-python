@@ -17,7 +17,7 @@ def triangle_shape(n, fillchar="x", spacechar=" "):
 
     .. testcode::
 
-        from lab1.functions import triangle_shape
+        from sdia_python.lab1.functions import triangle_shape
         print(triangle_shape(6, fillchar="x", spacechar="_"))
 
     .. testoutput::

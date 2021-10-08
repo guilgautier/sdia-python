@@ -96,8 +96,8 @@ conda deactivate
 In order to be able to import your code in various places of your project (source files, test files, noteboooks), like
 
 ```python
-import lab1
-from lab1.xxx import yyy
+import sdia_python.lab1
+from sdia_python.lab1.xxx import yyy
 ```
 
 > You can [install a project in "editable" or "develop" mode](https://packaging.python.org/guides/distributing-packages-using-setuptools/#working-in-development-mode) while you’re working on it.

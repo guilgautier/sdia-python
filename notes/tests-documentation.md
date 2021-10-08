@@ -112,7 +112,7 @@ Then, open the file [docs/_build/html/index.html](../docs/_build/html/index.html
 **Provided you use the `sphinx.ext.doctest` extension in your [`docs/conf.py`](../docs/conf.py) file**.
 
 Doctests, i.e., tests written in the docstrings, can be used to test and showcase your Python object/function etc.
-For an example, see the `triangle_shape` function docstring in the [lab1/functions.py](../src/lab1/functions.py) file.
+For an example, see the `triangle_shape` function docstring in the [lab1/functions.py](../src/sdia_python/lab1/functions.py) file.
 
 To run the doctests use
 

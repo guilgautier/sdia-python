@@ -63,7 +63,7 @@ See also
       # MacOS
       mkdir src/sdia_python
       touch src/sdia_python/__init__.py
-      git mv src/sdia_python/lab* src/sdia_python
+      git mv src/lab* src/sdia_python
       git status
       git add src/sdia_python
       git status
