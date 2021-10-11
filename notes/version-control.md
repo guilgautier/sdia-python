@@ -34,7 +34,7 @@ First few steps with [git](https://git-scm.com/) and [GitHub](https://github.com
 
 ### Online
 
-- Create a new **blank** (no README, Licence, .gitignore files, etc.) GitHub repository called `sdia-git`.
+- Create a new **blank** (no README, License, .gitignore files, etc.) GitHub repository called `sdia-git`.
 
 ### On your machine
 
@@ -59,7 +59,7 @@ First few steps with [git](https://git-scm.com/) and [GitHub](https://github.com
     - Danger Zone
       - Delete this repository
 - Create a new `sdia-git` repository, but this time,
-  - add README, Licence and .gitignore files.
+  - add README, License and .gitignore files.
 
 ### Back to your machine
 

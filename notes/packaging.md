@@ -14,7 +14,7 @@ Nevertheless, the way was already paved for you
 
 - [`src/`](../src/) structure
 - [`setup.cfg`](../setup.cfg), [`pyproject.toml`](../pyproject.toml), [`setup.py`](../setup.py) files
-- [`README.md`](../README.md) and [`LICENCE`](../LICENSE) files
+- [`README.md`](../README.md) and [`License`](../LICENSE) files
 
 However, the project is currently made of the packages `lab1`, `lab2`, ... which can be imported  using `from/import labX ...` (when the sdia-python virtual environment is activated).
 This may conflict with another course where you may also want to import the corresponding `lab*` files.

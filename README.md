@@ -127,16 +127,17 @@ See the [notes/anaconda-vscode.md](./notes/anaconda-vscode.md) file.
 
 [Jupyter](https://jupyter.org/) notebooks allow you to easily prototype code and showcase your project, see [`notebooks/`](./notebooks/) folder.
 
-In order to automatically reflect modifications of the source files (located in [`src/`](./src/)) into your notebook, make sure your notebook has the following cell **and run it!**
+In order to automatically reflect modifications of the source files (located in [`src/`](./src/)) into your notebook, make sure your notebook has the following cell (make it the top cell of your notebook) **and run it!**
 
 ```bash
 %load_ext autoreload
 %autoreload 2
 ```
 
-**For example make this the top cell of your notebook.**
-
 ### Launch a Jupyter notebook
+
+- Within VSCode, the [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) provides a full [Jupyter notebook experience within VSCode](https://code.visualstudio.com/docs/datascience/jupyter-notebooks).
+  - Simply open a `.ipynb` file located in [`notebooks/`](./notebooks/)
 
 - From the command line
 
@@ -145,7 +146,3 @@ In order to automatically reflect modifications of the source files (located in 
   # activate sdia-python
   jupyter notebook
   ```
-
-- Within VSCode
-  - The [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) provides a full [Jupyter notebook experience within VSCode](https://code.visualstudio.com/docs/datascience/jupyter-notebooks).
-    - Simply open a `.ipynb` file located in [`notebooks/`](./notebooks/)
