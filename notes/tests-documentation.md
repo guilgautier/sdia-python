@@ -30,7 +30,7 @@ Run the package test suite with
 # cd path-to-your-project
 # conda activate sdia-python
 pytest  # run all tests discovered by pytest
-# run all tests from tests/lab1/
+# run all tests from tests/ folder
 pytest tests/
 # run all tests from all files contained in folder tests/lab1/
 pytest tests/lab1/

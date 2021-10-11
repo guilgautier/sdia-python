@@ -32,9 +32,13 @@
          - **Windows:** make sure you use "Command prompt" and not "PowerShell"
          - **MacOS:** use preferably "zsh"
 
-6. Run your tests
+6. Run your tests, see the "Run tests" section in the [`tests-documentation.md`](./tests-documentation.md#run-tests)
 
-   - ideally they should all pass, see the "Run tests" section in the [tests-documentation.md](./tests-documentation.md#run-tests) file
+   ```bash
+   pytest
+   ```
+
+   - ideally all the tests should pass
    - otherwise fix them 🔩
 
 7. Synchronize your project using git and GitHub
